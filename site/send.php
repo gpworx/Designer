@@ -3,7 +3,7 @@
 header('Content-Type: application/json; charset=utf-8');
 
 $TO   = 'gregor@gpworx.com';
-$FROM = 'configurador@gpworx.com';
+$FROM = 'gregor@gpworx.com';
 $MAX  = 10 * 1024 * 1024; // 10 MB
 
 function fail($code, $msg) { http_response_code($code); echo json_encode(['ok' => false, 'error' => $msg]); exit; }
