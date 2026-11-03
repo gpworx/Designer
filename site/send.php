@@ -33,6 +33,51 @@ $msg .= "Content-Disposition: attachment; filename=\"$name\"\r\n\r\n";
 $msg .= chunk_split(base64_encode($data)) . "--$b--\r\n";
 
 $encSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
-if (!mail($TO, $encSubject, $msg, $headers, "-f$FROM")) fail(500, 'El servidor no pudo enviar el correo');
 
-echo json_encode(['ok' => true]);
+// Si existe mail-config.php (lo genera la publicación desde los secretos de GitHub),
+// se envía por SMTP autenticado a través del servidor de correo real (servidor-correo.net).
+$cfgFile = __DIR__ . '/mail-config.php';
+$cfg = is_file($cfgFile) ? include $cfgFile : null;
+
+if (is_array($cfg) && !empty($cfg['pass'])) {
+    $err = smtp_send($cfg, $FROM, $TO, $encSubject, $headers, $msg);
+    if ($err !== null) fail(502, 'SMTP: ' . $err);
+} else {
+    if (!mail($TO, $encSubject, $msg, $headers, "-f$FROM")) fail(500, 'El servidor no pudo enviar el correo');
+}
+echo json_encode(['ok' => true, 'via' => (is_array($cfg) && !empty($cfg['pass'])) ? 'smtp' : 'mail']);
+
+function smtp_send($cfg, $from, $to, $subject, $headers, $body) {
+    $host = $cfg['host'] ?: 'smtp.servidor-correo.net';
+    $user = $cfg['user'] ?: $from;
+    $tries = [['ssl://' . $host, 465, false], ['tcp://' . $host, 587, true]];
+    $last = 'sin conexión';
+    foreach ($tries as [$addr, $port, $starttls]) {
+        $fp = @stream_socket_client("$addr:$port", $en, $es, 15);
+        if (!$fp) { $last = "$port: $es"; continue; }
+        stream_set_timeout($fp, 20);
+        $r = function () use ($fp) { $d = ''; while (($l = fgets($fp, 1024)) !== false) { $d .= $l; if (strlen($l) < 4 || $l[3] === ' ') break; } return $d; };
+        $c = function ($cmd, $ok) use ($fp, $r) { fwrite($fp, $cmd . "\r\n"); $res = $r(); if (strpos($res, (string)$ok) !== 0) throw new Exception(trim($res) ?: 'sin respuesta'); return $res; };
+        try {
+            $g = $r(); if (strpos($g, '220') !== 0) throw new Exception(trim($g));
+            $c('EHLO gpworx.com', 250);
+            if ($starttls) {
+                $c('STARTTLS', 220);
+                if (!stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) throw new Exception('TLS');
+                $c('EHLO gpworx.com', 250);
+            }
+            $c('AUTH LOGIN', 334);
+            $c(base64_encode($user), 334);
+            $c(base64_encode($cfg['pass']), 235);
+            $c("MAIL FROM:<$from>", 250);
+            $c("RCPT TO:<$to>", 250);
+            $c('DATA', 354);
+            $data = "To: <$to>\r\nSubject: $subject\r\nDate: " . date('r') . "\r\n" . $headers . "\r\n" . $body;
+            $data = preg_replace('/^\./m', '..', $data);
+            $c($data . "\r\n.", 250);
+            fwrite($fp, "QUIT\r\n"); fclose($fp);
+            return null;
+        } catch (Exception $e) { $last = "$port: " . $e->getMessage(); @fclose($fp); }
+    }
+    return $last;
+}
