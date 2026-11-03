@@ -7,17 +7,17 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Buscar los scripts PHP de correo de la web (sin mostrar contraseñas)
+      - name: Leer mail.php de la web (contraseñas y datos sensibles ocultos)
         env:
           S: ${{ secrets.FTP_SERVER }}
           U: ${{ secrets.FTP_USERNAME }}
           P: ${{ secrets.FTP_PASSWORD }}
         run: |
           sudo apt-get install -y -q lftp >/dev/null 2>&1
-          mkdir w && cd w
-          lftp -u "$U","$P" "$S" -e "set ftp:ssl-allow no; mirror --include-glob '*.php' --exclude designer/ --exclude wp-content/uploads/ --exclude wp-includes/ --exclude wp-admin/ --no-empty-dirs . .; quit" >/dev/null 2>&1 || true
-          echo "PHP encontrados: $(find . -name '*.php' | wc -l)"
-          grep -rlI -E "mail\(|PHPMailer|smtp|SMTP" --include='*.php' . | head -30
-          echo "----- líneas relevantes (contraseñas ocultas) -----"
-          grep -rnI -E "mail\(|PHPMailer|->Host|->Port|->Username|->SMTPSecure|From|info@|servidor-correo|smtp" --include='*.php' . \
-            | grep -viE "pass|pwd|clave|contrase" | cut -c1-220 | head -60
+          lftp -u "$U","$P" "$S" -e "set ftp:ssl-allow no; set cmd:fail-exit no; get mail.php -o mail.php; quit" 2>&1 | tail -2
+          [ -f mail.php ] || lftp -u "$U","$P" "$S" -e "set ftp:ssl-allow no; find -d 3 . | grep -i 'mail.*\.php'; quit" 2>&1 | head -20
+          [ -f mail.php ] || exit 0
+          echo "Tamaño: $(wc -c < mail.php) bytes, $(wc -l < mail.php) líneas"
+          echo "----- mail.php (valores de contraseña ocultos) -----"
+          sed -E 's/((pass|pwd|password|Password|clave)[^=]*=[>]?\s*)(["'"'"'])[^"'"'"']*(["'"'"'])/\1\3***\4/I' mail.php \
+            | sed -E 's/(->Password\s*=\s*)[^;]*/\1"***"/I' | grep -viE "^\s*$" | cut -c1-200 | head -120
