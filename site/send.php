@@ -3,7 +3,7 @@
 header('Content-Type: application/json; charset=utf-8');
 
 $TO   = 'gregor@gpworx.com';
-$FROM = 'gregor@gpworx.com';
+$FROM = 'info@gpworx.com'; // mismo buzón que el formulario de contacto de la web
 $MAX  = 10 * 1024 * 1024; // 10 MB
 
 function fail($code, $msg) { http_response_code($code); echo json_encode(['ok' => false, 'error' => $msg]); exit; }
@@ -22,7 +22,7 @@ $body    = $clean($_POST['body'] ?? '', 5000);
 $name    = preg_replace('/[^A-Za-z0-9._-]/', '', $_FILES['image']['name']) ?: 'captura.png';
 
 $b = 'b' . bin2hex(random_bytes(12));
-$headers  = "From: GPworx Configurador <$FROM>\r\n";
+$headers  = "From: GPworx Configurador <__FROM__>\r\nReply-To: <$TO>\r\n";
 $headers .= "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: multipart/mixed; boundary=\"$b\"\r\n";
 
@@ -39,6 +39,19 @@ $encSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
 $cfgFile = __DIR__ . '/mail-config.php';
 $cfg = is_file($cfgFile) ? include $cfgFile : null;
 
+// Si no, se reutiliza la configuración SMTP del formulario de contacto de la web (php/mail.php),
+// leyéndola en el propio servidor: la contraseña no se copia a ningún otro sitio.
+if (!is_array($cfg) || empty($cfg['pass'])) {
+    $webMail = dirname(__DIR__) . '/php/mail.php';
+    if (is_file($webMail)) {
+        $src = file_get_contents($webMail);
+        $get = function ($var) use ($src) { return preg_match('/\$' . $var . '\s*=\s*([\'"])(.*?)\1\s*;/', $src, $m) ? stripcslashes($m[2]) : ''; };
+        $cfg = ['host' => $get('host'), 'user' => $get('username'), 'pass' => $get('password')];
+        if ($get('from')) $FROM = $get('from');
+    }
+}
+
+$headers = str_replace('__FROM__', $FROM, $headers);
 if (is_array($cfg) && !empty($cfg['pass'])) {
     $err = smtp_send($cfg, $FROM, $TO, $encSubject, $headers, $msg);
     if ($err !== null) fail(502, 'SMTP: ' . $err);
@@ -50,18 +63,22 @@ echo json_encode(['ok' => true, 'via' => (is_array($cfg) && !empty($cfg['pass'])
 function smtp_send($cfg, $from, $to, $subject, $headers, $body) {
     $host = $cfg['host'] ?: 'smtp.servidor-correo.net';
     $user = $cfg['user'] ?: $from;
-    $tries = [['ssl://' . $host, 465, false], ['tcp://' . $host, 587, true]];
+    $tries = [['tcp://' . $host, 587, true], ['ssl://' . $host, 465, false], ['tcp://' . $host, 25, null]];
     $last = 'sin conexión';
     foreach ($tries as [$addr, $port, $starttls]) {
-        $fp = @stream_socket_client("$addr:$port", $en, $es, 15);
+        // El certificado del servidor de correo puede ser del proveedor (servidor-correo.net) y no de smtp.gpworx.com:
+        // se verifica la cadena del certificado pero no el nombre.
+        $ctx = stream_context_create(['ssl' => ['verify_peer' => true, 'verify_peer_name' => false, 'SNI_enabled' => true, 'peer_name' => $host]]);
+        $fp = @stream_socket_client("$addr:$port", $en, $es, 15, STREAM_CLIENT_CONNECT, $ctx);
         if (!$fp) { $last = "$port: $es"; continue; }
         stream_set_timeout($fp, 20);
         $r = function () use ($fp) { $d = ''; while (($l = fgets($fp, 1024)) !== false) { $d .= $l; if (strlen($l) < 4 || $l[3] === ' ') break; } return $d; };
         $c = function ($cmd, $ok) use ($fp, $r) { fwrite($fp, $cmd . "\r\n"); $res = $r(); if (strpos($res, (string)$ok) !== 0) throw new Exception(trim($res) ?: 'sin respuesta'); return $res; };
         try {
             $g = $r(); if (strpos($g, '220') !== 0) throw new Exception(trim($g));
-            $c('EHLO gpworx.com', 250);
-            if ($starttls) {
+            $ehlo = $c('EHLO gpworx.com', 250);
+            if ($starttls === null && stripos($ehlo ?? '', 'STARTTLS') === false) { /* puerto 25 sin TLS */ }
+            elseif ($starttls !== false) {
                 $c('STARTTLS', 220);
                 if (!stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) throw new Exception('TLS');
                 $c('EHLO gpworx.com', 250);
