@@ -138,13 +138,11 @@ aside .lh{margin:-4px 0 12px;color:var(--mut);font-size:12px}
       <button id="resetAll">Restablecer todo</button>
     </div>
   </div>
-  <aside><button class="shot" id="shotBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l2-2.5h6L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Enviar captura por email</button>
+  <aside><button class="shot" id="shotBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l2-2.5h6L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Enviar captura a GPworx</button>
   <div class="shotbox" id="shotBox" hidden>
     <img id="shotImg" alt="Captura de la configuración actual">
-    <label for="shotTo">Enviar a</label>
-    <input id="shotTo" type="email" inputmode="email" autocomplete="email" placeholder="nombre@empresa.com">
-    <div class="shotact"><button id="shotSend" type="button" class="pri">Enviar</button><button id="shotCancel" type="button">Cancelar</button></div>
     <p class="shotmsg" id="shotMsg" role="status"></p>
+    <div class="shotact"><button id="shotCancel" type="button">Cerrar</button></div>
   </div>
   <h3>ELEMENTOS CLAVE</h3><p class="lh">Los marcados con ✥ se pueden mover: tócalos aquí o en el 3D. Usa − y + para quitar o añadir unidades.</p><ol id="legend"></ol><div class="desc" id="desc"></div></aside>
 </div>
@@ -686,11 +684,10 @@ document.getElementById('zone').onclick=e=>{zoneG.visible=!zoneG.visible;e.curre
 show('C');
 
 
-// ---------- captura + email ----------
-const SEND_ENDPOINT=''; // opcional: URL de un script del servidor (p. ej. https://www.gpworx.com/moodboard/send.php) que reciba {to,subject,body,image} y envíe el correo con adjunto
-const shotBtn=document.getElementById('shotBtn'),shotBox=document.getElementById('shotBox'),shotImg=document.getElementById('shotImg'),shotTo=document.getElementById('shotTo'),shotMsg=document.getElementById('shotMsg'),shotSend=document.getElementById('shotSend');
-let shotBlob=null,shotURL=null;
-try{shotTo.value=localStorage.getItem('dupontC-mail')||'';}catch(_){}
+// ---------- captura + envío directo ----------
+const SEND_ENDPOINT='send.php',SEND_TO='gregor@gpworx.com';
+const shotBtn=document.getElementById('shotBtn'),shotBox=document.getElementById('shotBox'),shotImg=document.getElementById('shotImg'),shotMsg=document.getElementById('shotMsg');
+let shotBlob=null,shotURL=null,sending=false;
 function capture(){const hadSel=selBox&&selBox.visible;if(selBox)selBox.visible=false;renderer.render(scene,camera);
   const src=canvas,W0=src.width,H0=src.height,sc=W0/stage.clientWidth,foot=Math.round(64*sc);
   const c=document.createElement('canvas');c.width=W0;c.height=H0+foot;const g=c.getContext('2d');
@@ -708,36 +705,19 @@ function layoutText(){return MOV.map(G=>{const d=Math.round(((-G.rotation.y*180/
 const fname=()=>'stand-dupont-option-A-'+new Date().toISOString().slice(0,16).replace(/[:T]/g,'-')+'.png';
 const subj='Stand DuPont Aquatech 2027 · Option A · configuración';
 const bodyTxt=()=>'Captura de la configuración del stand (Option A).\n\nPosiciones (X sobre el lado de 12 m, Y sobre el de 8 m, desde la esquina de la recepción):\n'+layoutText()+'\n';
-const okMail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-shotBtn.onclick=async()=>{shotMsg.textContent='';shotBlob=await capture();if(shotURL)URL.revokeObjectURL(shotURL);shotURL=URL.createObjectURL(shotBlob);shotImg.src=shotURL;shotBox.hidden=false;shotSend.disabled=false;(shotTo.value?shotSend:shotTo).focus();};
+shotBtn.onclick=async()=>{if(sending)return;sending=true;shotBtn.disabled=true;
+  try{shotBlob=await capture();if(shotURL)URL.revokeObjectURL(shotURL);shotURL=URL.createObjectURL(shotBlob);shotImg.src=shotURL;shotBox.hidden=false;
+    shotMsg.textContent='Enviando captura a '+SEND_TO+'…';
+    const fd=new FormData();fd.append('subject',subj);fd.append('body',bodyTxt());fd.append('image',shotBlob,fname());
+    const r=await fetch(SEND_ENDPOINT,{method:'POST',body:fd});const j=await r.json().catch(()=>({}));
+    if(!r.ok||!j.ok)throw new Error(j.error||('HTTP '+r.status));
+    shotMsg.innerHTML='✓ Captura enviada a <b></b>.';shotMsg.querySelector('b').textContent=SEND_TO;
+  }catch(e){
+    const a=document.createElement('a');a.href=shotURL;a.download=fname();document.body.appendChild(a);a.click();a.remove();
+    const href='mailto:'+SEND_TO+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(bodyTxt()+'\n(Adjunta la imagen '+fname()+')');
+    shotMsg.innerHTML='No se pudo enviar automáticamente ('+String(e.message||e).replace(/[<>&]/g,'')+'). Se ha descargado la imagen: <a>envíala por correo a '+SEND_TO+'</a>.';shotMsg.querySelector('a').href=href;
+  }finally{sending=false;shotBtn.disabled=false;}};
 document.getElementById('shotCancel').onclick=()=>{shotBox.hidden=true;shotMsg.textContent='';};
-async function saveImage(){
-  const cl=window.claude&&window.claude.use?await window.claude.use('downloads'):null;
-  if(cl){await cl.save({filename:fname(),data:shotBlob});return true;}
-  if(window.claude&&window.claude.use)return false;
-  const a=document.createElement('a');a.href=shotURL;a.download=fname();document.body.appendChild(a);a.click();a.remove();return true;}
-shotSend.onclick=async()=>{const to=shotTo.value.trim();
-  if(!okMail(to)){shotMsg.textContent='Escribe una dirección de email válida.';shotTo.focus();return;}
-  try{localStorage.setItem('dupontC-mail',to);}catch(_){}
-  shotSend.disabled=true;shotMsg.textContent='Enviando…';
-  try{
-    if(SEND_ENDPOINT){const fd=new FormData();fd.append('to',to);fd.append('subject',subj);fd.append('body',bodyTxt());fd.append('image',shotBlob,fname());
-      const r=await fetch(SEND_ENDPOINT,{method:'POST',body:fd});if(!r.ok)throw new Error('HTTP '+r.status);
-      shotMsg.innerHTML='Captura enviada a <b></b>.';shotMsg.querySelector('b').textContent=to;return;}
-    const file=new File([shotBlob],fname(),{type:'image/png'});
-    if(navigator.canShare&&navigator.canShare({files:[file]})){
-      try{await navigator.share({files:[file],title:subj,text:bodyTxt()});shotMsg.textContent='Elige tu app de correo en el menú de compartir y escribe '+to+' como destinatario.';return;}
-      catch(e){if(e&&e.name==='AbortError'){shotMsg.textContent='Envío cancelado.';return;}}}
-    let saved=false;try{saved=await saveImage();}catch(e){if(e&&e.code==='declined'){shotMsg.textContent='No se guardó la imagen. Vuelve a pulsar Enviar si la necesitas.';return;}}
-    const href='mailto:'+encodeURIComponent(to)+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(bodyTxt()+'\n(Adjunta la imagen '+fname()+')');
-    const inClaude=!!(window.claude&&window.claude.use);
-    shotMsg.innerHTML=inClaude?(saved?'Imagen guardada. ':'')+'Adjúntala en un correo a <b></b>. <a target="_blank" rel="noopener">Abrir correo con el mensaje</a> (si tu navegador lo permite).'
-      :(saved?'Imagen descargada. ':'')+'Se abre tu correo con el mensaje para <b></b>: <b>adjunta la imagen descargada</b> y envíalo. Si no se abre, <a target="_blank" rel="noopener">pulsa aquí</a>.';
-    shotMsg.querySelector('b').textContent=to;shotMsg.querySelector('a').href=href;
-    if(!(window.claude&&window.claude.use))location.href=href;
-  }catch(e){shotMsg.textContent='No se pudo enviar la captura ('+(e.message||e.code||'error')+'). Inténtalo de nuevo.';}
-  finally{shotSend.disabled=false;}};
-shotTo.addEventListener('keydown',e=>{if(e.key==='Enter')shotSend.click();});
 function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
 window.addEventListener('resize',resize);resize();
 setInterval(()=>countdowns.forEach(c=>{c.draw(c.g,c.w,c.h);c.t.needsUpdate=true;}),1000);
