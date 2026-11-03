@@ -1,0 +1,14 @@
+name: Probar envío de captura
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Llamar a send.php con una imagen de prueba
+        run: |
+          printf '\x89PNG\r\n\x1a\n' > t.png; head -c 200 /dev/urandom >> t.png
+          for u in https://gpworx.com/designer/send.php https://www.gpworx.com/designer/send.php; do
+            echo "== $u"; curl -sS -L -i -F subject=Prueba -F body="Prueba automática" -F image=@t.png\;type=image/png "$u" | head -40; echo; done
