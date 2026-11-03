@@ -1,0 +1,32 @@
+name: Traer logo desde el servidor
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  logo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Buscar y descargar el logo
+        env:
+          S: ${{ secrets.FTP_SERVER }}
+          U: ${{ secrets.FTP_USERNAME }}
+          P: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          sudo apt-get install -y -q lftp >/dev/null 2>&1
+          L="lftp -u $U,$P $S -e"
+          lftp -u "$U","$P" "$S" -e "set ftp:ssl-allow no; cls -1 gpworx/; quit" 2>&1 | head -80 > list.txt || true
+          echo "== gpworx/"; cat list.txt
+          lftp -u "$U","$P" "$S" -e "set ftp:ssl-allow no; find -d 4 . | grep -iE 'vctr|communication.*\.(svg|png)'; quit" 2>&1 | grep -v "^./designer" | head -30 | tee found.txt
+          mkdir -p logo-src
+          while read f; do lftp -u "$U","$P" "$S" -e "set ftp:ssl-allow no; get \"$f\" -o \"logo-src/$(basename "$f")\"; quit" || true; done < found.txt
+          ls -la logo-src
+      - name: Guardar en una rama aparte
+        run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b logo-import
+          git add logo-src list.txt found.txt -f && git commit -m "Logo desde el servidor" && git push -f origin logo-import || true
