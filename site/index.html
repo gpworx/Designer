@@ -17,6 +17,11 @@ header{padding:30px 20px 26px;display:flex;flex-direction:column;gap:24px}
 header .tabs{justify-content:center}
 header h1{margin:0;font-size:22px;letter-spacing:.5px}
 header p{margin:2px 0 0;color:var(--mut)}
+header .ttl{min-width:0}
+header .ttl h1{white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis}
+header .ttl h2{margin:4px 0 0;font-size:16px;font-weight:600;color:#d6d8de;letter-spacing:.3px}
+header .ttl h3{margin:2px 0 0;font-size:14px;font-weight:400;color:var(--mut)}
+@media(max-width:600px){header .ttl h1{font-size:clamp(12px,4.1vw,22px);letter-spacing:0}}
 .hr{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
 .hl{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .hl .gp{height:52px;width:auto;display:block;padding-right:18px;border-right:1px solid #3a3b40}
@@ -116,7 +121,7 @@ body.shield .stage canvas,body.shield #markers,body.shield #mlabels,body.shield 
 </style>
 <div class="printblock">Esta propuesta es confidencial y no se puede imprimir. Para recibir la configuración, usa el botón «Enviar captura a GPworx» o escribe a gregor@gpworx.com.</div>
 <header>
-  <div class="top"><img class="gp" alt="GPWORX Creative Communication" src="logo-gpworx.svg"><div class="ttl"><h1>Aquatech Amsterdam 2027 · Stand isla 12 × 8 m</h1><p>Option A · Dintel a Entrada · configurador: toca un elemento y arrástralo para moverlo</p></div><span class="sp"></span></div>
+  <div class="top"><img class="gp" alt="GPWORX Creative Communication" src="logo-gpworx.svg"><div class="ttl"><h1>Stand DuPont - Aquatech 2027 (Isla 12×8 m)</h1><h2>RAI Amsterdam</h2><h3>Option A · Dintel a Entrada · configurador: toca un elemento y arrástralo para moverlo</h3></div><span class="sp"></span></div>
 </header>
 <div class="wrap">
   <div class="col">
