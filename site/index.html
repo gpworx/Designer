@@ -121,7 +121,7 @@ body.shield .stage canvas,body.shield #markers,body.shield #mlabels,body.shield 
 </style>
 <div class="printblock">Esta propuesta es confidencial y no se puede imprimir. Para recibir la configuración, usa el botón «Enviar captura a GPworx» o escribe a gregor@gpworx.com.</div>
 <header>
-  <div class="top"><img class="gp" alt="GPWORX Creative Communication" src="logo-gpworx.svg"><div class="ttl"><h1>Stand - Event 2027</h1><h2>Isla 12×8 m</h2><h3>Option A · Dintel a Entrada · configurador: toca un elemento y arrástralo para moverlo</h3></div><span class="sp"></span></div>
+  <div class="top"><img class="gp" alt="GPWORX Creative Communication" src="logo-gpworx.svg"><div class="ttl"><h1>Stand - Event 2027 (Isla 12×8 m)</h1><h3>Option A · Dintel a Entrada · configurador: toca un elemento y arrástralo para moverlo</h3></div><span class="sp"></span></div>
 </header>
 <div class="wrap">
   <div class="col">
@@ -162,9 +162,9 @@ body.shield .stage canvas,body.shield #markers,body.shield #mlabels,body.shield 
   <h3>ELEMENTOS CLAVE</h3><p class="lh">Los marcados con ✥ se pueden mover: tócalos aquí o en el 3D. Usa − y + para quitar o añadir unidades.</p><ol id="legend"></ol><div class="desc" id="desc"></div></aside>
 </div>
 <div class="strip" id="strip"></div>
-<section class="norm"><h3>CUMPLIMIENTO NORMATIVA RAI · AQUATECH 2027</h3><div class="ng" id="norm"></div><p>Stand isla de 96 m²: todos los lados abiertos. Altura estándar 2,5 m, hasta 3,5 m permitido; por encima solo según los puntos 4, 5 y 6. Tarima máx. 10 cm con rampa de acceso 1×1 m. Planos y alzados a RAI Stand Design; colgados solo con Mansveld Expotech.</p></section>
-<p class="note">Volumetría orientativa a escala aproximada (1 unidad = 1 m) para discutir la distribución; no es un render fotorrealista. Alturas y cerramientos (propios y de los stands vecinos) ajustados a la normativa de construcción de Aquatech 2027; pendiente de validación por RAI Stand Design.</p>
-<div class="credit"><span style="color:#b4b6bc;font-size:17px;letter-spacing:.3px">Propuesta de diseño de stand de GPWORX · DuPont Water Solutions · Aquatech Amsterdam 2027</span></div>
+<section class="norm"><h3>CUMPLIMIENTO NORMATIVA RAI · EVENT 2027</h3><div class="ng" id="norm"></div><p>Stand isla de 96 m²: todos los lados abiertos. Altura estándar 2,5 m, hasta 3,5 m permitido; por encima solo según los puntos 4, 5 y 6. Tarima máx. 10 cm con rampa de acceso 1×1 m. Planos y alzados a RAI Stand Design; colgados solo con Mansveld Expotech.</p></section>
+<p class="note">Volumetría orientativa a escala aproximada (1 unidad = 1 m) para discutir la distribución; no es un render fotorrealista. Alturas y cerramientos (propios y de los stands vecinos) ajustados a la normativa de construcción de Event 2027; pendiente de validación por RAI Stand Design.</p>
+<div class="credit"><span style="color:#b4b6bc;font-size:17px;letter-spacing:.3px">Propuesta de diseño de stand de GPWORX · DuPont Water Solutions · Event 2027</span></div>
 
 <script>/**
  * @license
@@ -687,7 +687,7 @@ function rebuildMarkers(){const d=DATA[cur];mkWrap.innerHTML='';MKS=[];
   mkEls=MKS.map(o=>o.e);}
 function refresh(){renderLegend();rebuildMarkers();}
 function show(k){cur=k;const d=DATA[k];
-  document.getElementById('tk').textContent='OPTION A';document.getElementById('tt').textContent='Stand - Event';document.getElementById('ts').textContent='';document.querySelector('.title-ov .sep').style.display='none';
+  document.getElementById('tk').textContent='OPTION A';document.getElementById('tt').textContent='';document.getElementById('ts').textContent='';document.querySelector('.title-ov .sep').style.display='none';
   document.getElementById('desc').textContent=d.d;
   document.getElementById('strip').innerHTML=d.f.map(f=>`<div><b>${f[0]}</b><span>${f[1]}</span></div>`).join('');
   document.getElementById('norm').innerHTML=d.n.map(f=>`<div><b>✓ ${f[0]}</b><span>${f[1]}</span></div>`).join('');
