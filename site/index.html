@@ -106,6 +106,10 @@ aside .lh{margin:-4px 0 12px;color:var(--mut);font-size:12px}
 .views button.tool.on{background:#ffb020;border-color:#ffb020;color:#222}
 .views button:not([data-v]){border-radius:6px}
 .views button[data-v="hall"]{margin-right:10px}
+.views #resetAll{background:#141518;border-color:#2e3035;color:#c9cbd1}
+.views #resetAll:hover{border-color:#55575e}
+.views #resetAll.on{background:#c0392b;border-color:#c0392b;color:#fff}
+@media(max-width:600px){.views{gap:5px}.views button[data-v]{padding:6px 9px;font-size:11.5px}.views button[data-v="hall"]{margin-right:0}}
 .stage.measuring canvas{cursor:crosshair}
 .ml{position:absolute;transform:translate(-50%,-50%);background:#ffb020;color:#222;font:bold 13px Helvetica,Arial,sans-serif;font-variant-numeric:tabular-nums;padding:3px 8px;border-radius:6px;white-space:nowrap;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.5)}
 .ml.pv{background:rgba(255,176,32,.75)}
@@ -145,12 +149,12 @@ body.shield .stage canvas,body.shield #markers,body.shield #mlabels,body.shield 
       <button data-v="front">Front</button>
       <button data-v="side">Side</button>
       <button data-v="hall">Pavillon</button>
-      <button id="measBtn" class="tool"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15.5 15.5 3 21 8.5 8.5 21z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 12l2 2M10 9l1.5 1.5M13 6l2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Medir (cm)</button>
-      <button id="measClr" hidden>Borrar medidas</button>
-      <button id="gridBtn" class="tool"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Cuadrícula 1 m</button>
-      <button id="zone">Zona 2 m</button>
-      <button id="rot">⟳ Girar</button>
-      <button id="resetAll">Restablecer todo</button>
+      <button id="measBtn" class="tool"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15.5 15.5 3 21 8.5 8.5 21z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 12l2 2M10 9l1.5 1.5M13 6l2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Measure (cm)</button>
+      <button id="measClr" hidden>Clear measures</button>
+      <button id="gridBtn" class="tool"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Grid 1 m</button>
+      <button id="zone">2 m zone</button>
+      <button id="rot">⟳ Rotate</button>
+      <button id="resetAll">Reset</button>
     </div>
   </div>
   <aside><button class="shot" id="shotBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l2-2.5h6L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Enviar captura a GPworx</button>
@@ -659,7 +663,7 @@ document.getElementById('selX').onclick=()=>select(null);
 document.getElementById('selDup').onclick=()=>{if(sel)addOf(sel.userData.type,sel);};
 document.getElementById('selDel').onclick=()=>{if(sel)removeOf(sel.userData.type,sel);};
 window.addEventListener('keydown',e=>{if(!sel||/INPUT|TEXTAREA/.test(document.activeElement.tagName))return;if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();removeOf(sel.userData.type,sel);}});
-let rT=null;document.getElementById('resetAll').onclick=e=>{const b=e.currentTarget;if(!rT){b.textContent='¿Seguro? Toca otra vez';b.classList.add('on');rT=setTimeout(()=>{rT=null;b.textContent='Restablecer todo';b.classList.remove('on');},3000);return;}clearTimeout(rT);rT=null;b.textContent='Restablecer todo';b.classList.remove('on');select(null);MOV.slice().forEach(unplace);ORIG.forEach(G=>{const h=G.userData.home;place(G,h.x,h.z,0);});renameAll();save();refresh();};
+let rT=null;document.getElementById('resetAll').onclick=e=>{const b=e.currentTarget;if(!rT){b.textContent='Sure? Tap again';b.classList.add('on');rT=setTimeout(()=>{rT=null;b.textContent='Reset';b.classList.remove('on');},3000);return;}clearTimeout(rT);rT=null;b.textContent='Reset';b.classList.remove('on');select(null);MOV.slice().forEach(unplace);ORIG.forEach(G=>{const h=G.userData.home;place(G,h.x,h.z,0);});renameAll();save();refresh();};
 load();
 canvas.addEventListener('wheel',e=>{e.preventDefault();rad=Math.min(90,Math.max(6,rad*(1+e.deltaY*0.001)));},{passive:false});
 let pinch=null;
