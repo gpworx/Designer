@@ -104,6 +104,8 @@ aside .lh{margin:-4px 0 12px;color:var(--mut);font-size:12px}
 .views button.tool{display:inline-flex;align-items:center;gap:6px}
 .views button.tool svg{width:15px;height:15px}
 .views button.tool.on{background:#ffb020;border-color:#ffb020;color:#222}
+.views button:not([data-v]){border-radius:6px}
+.views button[data-v="hall"]{margin-right:10px}
 .stage.measuring canvas{cursor:crosshair}
 .ml{position:absolute;transform:translate(-50%,-50%);background:#ffb020;color:#222;font:bold 13px Helvetica,Arial,sans-serif;font-variant-numeric:tabular-nums;padding:3px 8px;border-radius:6px;white-space:nowrap;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.5)}
 .ml.pv{background:rgba(255,176,32,.75)}
@@ -138,13 +140,11 @@ body.shield .stage canvas,body.shield #markers,body.shield #mlabels,body.shield 
     </div>
   </div>
     <div class="views" id="views">
-      <button data-v="main">Vista principal</button>
-      <button data-v="aerial">Aérea</button>
-      <button data-v="front">Pasillo superior</button>
-      <button data-v="side">Lateral izquierdo</button>
-      <button data-v="entry">Desde la llegada</button>
-      <button data-v="arrive">Llegada al pabellón</button>
-      <button data-v="hall">Pabellón</button>
+      <button data-v="main">Main</button>
+      <button data-v="aerial">Top</button>
+      <button data-v="front">Front</button>
+      <button data-v="side">Side</button>
+      <button data-v="hall">Pavillon</button>
       <button id="measBtn" class="tool"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15.5 15.5 3 21 8.5 8.5 21z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 12l2 2M10 9l1.5 1.5M13 6l2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Medir (cm)</button>
       <button id="measClr" hidden>Borrar medidas</button>
       <button id="gridBtn" class="tool"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Cuadrícula 1 m</button>
