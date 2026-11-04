@@ -121,7 +121,7 @@ body.shield .stage canvas,body.shield #markers,body.shield #mlabels,body.shield 
 </style>
 <div class="printblock">Esta propuesta es confidencial y no se puede imprimir. Para recibir la configuración, usa el botón «Enviar captura a GPworx» o escribe a gregor@gpworx.com.</div>
 <header>
-  <div class="top"><img class="gp" alt="GPWORX Creative Communication" src="logo-gpworx.svg"><div class="ttl"><h1>Stand DuPont - Aquatech 2027 (Isla 12×8 m)</h1><h2>RAI Amsterdam</h2><h3>Option A · Dintel a Entrada · configurador: toca un elemento y arrástralo para moverlo</h3></div><span class="sp"></span></div>
+  <div class="top"><img class="gp" alt="GPWORX Creative Communication" src="logo-gpworx.svg"><div class="ttl"><h1>Stand - Event 2027</h1><h2>Isla 12×8 m</h2><h3>Option A · Dintel a Entrada · configurador: toca un elemento y arrástralo para moverlo</h3></div><span class="sp"></span></div>
 </header>
 <div class="wrap">
   <div class="col">
@@ -687,7 +687,7 @@ function rebuildMarkers(){const d=DATA[cur];mkWrap.innerHTML='';MKS=[];
   mkEls=MKS.map(o=>o.e);}
 function refresh(){renderLegend();rebuildMarkers();}
 function show(k){cur=k;const d=DATA[k];
-  document.getElementById('tk').textContent='OPTION A';document.getElementById('tt').textContent=d.t;document.getElementById('ts').textContent=d.s;
+  document.getElementById('tk').textContent='OPTION A';document.getElementById('tt').textContent='Stand - Event';document.getElementById('ts').textContent='';document.querySelector('.title-ov .sep').style.display='none';
   document.getElementById('desc').textContent=d.d;
   document.getElementById('strip').innerHTML=d.f.map(f=>`<div><b>${f[0]}</b><span>${f[1]}</span></div>`).join('');
   document.getElementById('norm').innerHTML=d.n.map(f=>`<div><b>✓ ${f[0]}</b><span>${f[1]}</span></div>`).join('');
@@ -713,12 +713,12 @@ function capture(){const hadSel=selBox&&selBox.visible;if(selBox)selBox.visible=
   document.querySelectorAll('#mlabels .ml').forEach(e=>{if(e.style.display==='none'||!e.textContent)return;const x=parseFloat(e.style.left)*sc,y=parseFloat(e.style.top)*sc;
     g.font=`bold ${13*sc}px Helvetica,Arial`;const tw=g.measureText(e.textContent).width+16*sc,th2=22*sc;g.fillStyle='#ffb020';g.fillRect(x-tw/2,y-th2/2,tw,th2);g.fillStyle='#222';g.textAlign='center';g.textBaseline='middle';g.fillText(e.textContent,x,y+0.5*sc);});
   g.fillStyle='#5d729e';g.fillRect(0,H0,W0,foot);g.fillStyle='#fff';g.textBaseline='middle';g.textAlign='left';g.font=`bold ${18*sc}px Helvetica,Arial`;
-  g.fillText('DuPont Water Solutions · Aquatech Amsterdam 2027 · Option A',20*sc,H0+foot/2);
+  g.fillText('Stand - Event 2027 · Option A',20*sc,H0+foot/2);
   g.textAlign='right';g.font=`${15*sc}px Helvetica,Arial`;g.fillText(new Date().toLocaleString('es-ES',{dateStyle:'short',timeStyle:'short'}),W0-20*sc,H0+foot/2);
   return new Promise(r=>c.toBlob(r,'image/png'));}
 function layoutText(){return MOV.map(G=>{const d=Math.round(((-G.rotation.y*180/Math.PI)%360+360)%360);return `· ${G.userData.name}: X ${fmt(G.position.x+6)} m, Y ${fmt(G.position.z+4)} m, giro ${d}°`;}).join('\n');}
 const fname=()=>'stand-dupont-option-A-'+new Date().toISOString().slice(0,16).replace(/[:T]/g,'-')+'.png';
-const subj='Stand DuPont Aquatech 2027 · Option A · configuración';
+const subj='Stand - Event 2027 · Option A · configuración';
 const bodyTxt=()=>'Captura de la configuración del stand (Option A).\n\nPosiciones (X sobre el lado de 12 m, Y sobre el de 8 m, desde la esquina de la recepción):\n'+layoutText()+'\n';
 shotBtn.onclick=async()=>{if(sending)return;sending=true;shotBtn.disabled=true;
   try{shotBlob=await capture();if(shotURL)URL.revokeObjectURL(shotURL);shotURL=URL.createObjectURL(shotBlob);shotImg.src=shotURL;shotBox.hidden=false;
