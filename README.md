@@ -17,7 +17,6 @@ El simulador debe generarse o guardarse dentro de `site/` para que se publique.
 
 | Archivo | Qué contiene |
 |---|---|
-| `design/index.html` | **Versión solo visor** (gpworx.com/designer/design/): mismos `css/` y `js/`, sin mover, girar ni cambiar cantidades |
 | `index.html` | Versión **editable**. Estructura de la página por bloques: cabecera, visor 3D, botones, panel lateral, normativa y pie (cada bloque va marcado con un comentario) |
 | `css/styles.css` | Todos los estilos, incluidos los de móvil y la protección (marca de agua, bloqueos) |
 | `js/app.js` | Lógica del simulador, dividida en secciones (ver el índice al principio del archivo) |
@@ -29,3 +28,9 @@ El simulador debe generarse o guardarse dentro de `site/` para que se publique.
 Textos a cambiar para un nuevo cliente/evento: título y descripción en `index.html`
 (cabecera), normativa y pie en `index.html`, y en `js/app.js` las secciones
 `data` (leyenda y normativa) y `captura + envío directo` (asunto y pie de la captura).
+
+## Versión solo visor: gpworx.com/design
+
+`site-view/index.html` se publica en `design/` y carga los `css/` y `js/` de
+`designer/`, así que comparte diseño con la versión editable. Activa
+`GP_VIEW_ONLY`: no se pueden mover, girar, duplicar, añadir ni quitar elementos.

@@ -3,7 +3,7 @@ name: Publicar en gpworx.com/designer
 on:
   push:
     branches: [main]
-    paths: ['site/**']
+    paths: ['site/**', 'site-view/**']
   workflow_dispatch:
 
 concurrency:
@@ -36,3 +36,12 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./site/
           server-dir: designer/
+
+      - name: Subir la versión solo visor (site-view/) a gpworx.com/design
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./site-view/
+          server-dir: design/
