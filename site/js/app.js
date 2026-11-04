@@ -13,6 +13,12 @@
 //   · captura + envío directo                  → botón "Enviar captura a GPworx" (send.php)
 //   · protección                               → marca de agua y bloqueos anti-captura
 // =====================================================================
+// ---------- modo solo lectura (versión design/) ----------
+// En design/index.html se define window.GP_VIEW_ONLY=true: no se pueden mover, girar,
+// añadir ni quitar elementos, y no se leen ni guardan cambios del navegador.
+const VIEW_ONLY=!!window.GP_VIEW_ONLY;
+if(VIEW_ONLY)document.documentElement.classList.add('view-only');
+
 function main(IM){
 const T=THREE;
 const canvas=document.getElementById('c'), stage=document.getElementById('stage');
@@ -428,7 +434,7 @@ function setNdc(e){const r=canvas.getBoundingClientRect();ndc.set((e.clientX-r.l
 function pick(e){setNdc(e);const h=ray.intersectObjects(B.children,true);for(const x of h){if(!x.object.visible)continue;let o=x.object;while(o&&o.parent!==B)o=o.parent;return o&&MOV.includes(o)?o:null;}return null;}
 const LS='dupontC-config-v1';
 const LS2='dupontC-config-v2';let uid=0;
-function save(){try{localStorage.setItem(LS2,JSON.stringify(MOV.map(G=>({k:G.userData.key,s:G.userData.src,x:+G.position.x.toFixed(3),z:+G.position.z.toFixed(3),r:+G.rotation.y.toFixed(4)}))));}catch(_){}}
+function save(){if(VIEW_ONLY)return;try{localStorage.setItem(LS2,JSON.stringify(MOV.map(G=>({k:G.userData.key,s:G.userData.src,x:+G.position.x.toFixed(3),z:+G.position.z.toFixed(3),r:+G.rotation.y.toFixed(4)}))));}catch(_){}}
 function cloneOf(srcG,key){const G=srcG.clone(true);G.userData={key,src:srcG.userData.src,type:srcG.userData.type,name:'',home:{x:srcG.position.x,z:srcG.position.z,r:0}};return G;}
 function place(G,x,z,r){G.position.x=x;G.position.z=z;G.rotation.y=r||0;if(!B.children.includes(G))B.add(G);if(!MOV.includes(G))MOV.push(G);}
 function unplace(G){B.remove(G);const i=MOV.indexOf(G);if(i>=0)MOV.splice(i,1);}
@@ -479,7 +485,7 @@ document.getElementById('measClr').onclick=measClear;
 window.addEventListener('keydown',e=>{if(e.key==='Escape'&&measOn)measMode(false);});
 canvas.addEventListener('pointerdown',e=>{if(pinch)return;anim=null;canvas.setPointerCapture(e.pointerId);downAt={x:e.clientX,y:e.clientY};
   if(measOn){drag={x:e.clientX,y:e.clientY};return;}
-  const G=pick(e);
+  const G=VIEW_ONLY?null:pick(e);
   if(G){select(G);if(ray.ray.intersectPlane(ground,hitP)){itemDrag={G,dx:G.position.x-hitP.x,dz:G.position.z-hitP.z,moved:false};auto=false;stage.classList.add('dragging');}return;}
   drag={x:e.clientX,y:e.clientY};});
 canvas.addEventListener('pointermove',e=>{
@@ -498,7 +504,7 @@ document.getElementById('selDup').onclick=()=>{if(sel)addOf(sel.userData.type,se
 document.getElementById('selDel').onclick=()=>{if(sel)removeOf(sel.userData.type,sel);};
 window.addEventListener('keydown',e=>{if(!sel||/INPUT|TEXTAREA/.test(document.activeElement.tagName))return;if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();removeOf(sel.userData.type,sel);}});
 let rT=null;document.getElementById('resetAll').onclick=e=>{const b=e.currentTarget;if(!rT){b.textContent='Sure? Tap again';b.classList.add('on');rT=setTimeout(()=>{rT=null;b.textContent='Reset';b.classList.remove('on');},3000);return;}clearTimeout(rT);rT=null;b.textContent='Reset';b.classList.remove('on');select(null);MOV.slice().forEach(unplace);ORIG.forEach(G=>{const h=G.userData.home;place(G,h.x,h.z,0);});renameAll();save();refresh();};
-load();
+if(!VIEW_ONLY)load();
 canvas.addEventListener('wheel',e=>{e.preventDefault();rad=Math.min(90,Math.max(6,rad*(1+e.deltaY*0.001)));},{passive:false});
 let pinch=null;
 canvas.addEventListener('touchstart',e=>{if(e.touches.length===2){pinch=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);}},{passive:true});
@@ -510,7 +516,7 @@ canvas.style.touchAction='none';
 const mkWrap=document.getElementById('markers');let cur='C',mkEls=[];
 let MKS=[];
 function renderLegend(){const d=DATA[cur];
-  document.getElementById('legend').innerHTML=d.m.map(m=>{if(!m[3])return `<li><b>${m[0]}</b><span>${m[1]}</span></li>`;
+  document.getElementById('legend').innerHTML=d.m.map(m=>{if(!m[3]||VIEW_ONLY)return `<li><b>${m[0]}</b><span>${m[1]}</span></li>`;
     const n=MOV.filter(G=>G.userData.type===m[3]).length;
     return `<li class="mv" data-t="${m[3]}"><span class="pm"><button type="button" data-a="-" aria-label="Quitar ${m[1]}"${n?'':' disabled'}>−</button><b>${m[0]}</b><button type="button" data-a="+" aria-label="Añadir ${m[1]}">+</button></span><span class="nm">${m[1]}</span><i class="ct">×${n}</i></li>`;}).join('');
   document.querySelectorAll('#legend li.mv').forEach(li=>{const t=li.dataset.t;
@@ -520,7 +526,7 @@ function renderLegend(){const d=DATA[cur];
   if(sel)select(sel);}
 function rebuildMarkers(){const d=DATA[cur];mkWrap.innerHTML='';MKS=[];
   d.m.forEach(m=>{const Gs=m[3]?MOV.filter(G=>G.userData.type===m[3]):[null];
-    Gs.forEach(G=>{const e=document.createElement('div');e.className='mk'+(m[3]?' mv':'');e.textContent=m[0];mkWrap.appendChild(e);
+    Gs.forEach(G=>{const e=document.createElement('div');e.className='mk'+(m[3]&&!VIEW_ONLY?' mv':'');e.textContent=m[0];mkWrap.appendChild(e);
       MKS.push({e,m,G,loc:G?(G.userData.src===m[4]?m[5].clone():new T.Vector3(0,m[2].y,0)):null});});});
   mkEls=MKS.map(o=>o.e);}
 function refresh(){renderLegend();rebuildMarkers();}
@@ -538,7 +544,7 @@ show('C');
 
 
 // ---------- captura + envío directo ----------
-const SEND_ENDPOINT='send.php',SEND_TO='gregor@gpworx.com';
+const SEND_ENDPOINT=window.GP_SEND_ENDPOINT||'send.php',SEND_TO='gregor@gpworx.com';
 const shotBtn=document.getElementById('shotBtn'),shotBox=document.getElementById('shotBox'),shotImg=document.getElementById('shotImg'),shotMsg=document.getElementById('shotMsg');
 let shotBlob=null,shotURL=null,sending=false;
 function capture(){const hadSel=selBox&&selBox.visible;if(selBox)selBox.visible=false;renderer.render(scene,camera);

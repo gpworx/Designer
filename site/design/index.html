@@ -1,0 +1,71 @@
+<!-- VERSIÓN SOLO VISOR (gpworx.com/designer/design/): usa los mismos css/ y js/ que la versión editable -->
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>GPworx - Stand Design</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="../css/styles.css">
+</head><body>
+<!-- ===================== AVISO AL IMPRIMIR ===================== -->
+<div class="printblock">Esta propuesta es confidencial y no se puede imprimir. Para recibir la configuración, usa el botón «Enviar captura a GPworx» o escribe a gregor@gpworx.com.</div>
+<!-- ===================== CABECERA: logo · título (h1) · descripción (h3) ===================== -->
+<header>
+  <div class="top"><img class="gp" alt="GPWORX Creative Communication" src="../logo-gpworx.svg"><div class="ttl"><h1>Stand - Event 2027 (Isla 12×8 m)</h1><h3>Option A · Entrance Lintel<span class="hint-d"> · viewer: drag to orbit · pinch or scroll to zoom</span></h3></div><span class="sp"></span></div>
+</header>
+<!-- ===================== CUERPO ===================== -->
+<div class="wrap">
+  <div class="col">
+  <!-- ---------- VISOR 3D: lienzo, marcadores, marca de agua, etiqueta OPTION A, panel de selección ---------- -->
+  <div class="stage" id="stage">
+    <canvas id="c"></canvas>
+    <div id="markers"></div><div id="mlabels"></div>
+    <div class="wm" aria-hidden="true"><i id="wmTile"></i></div>
+    <div class="mhint" id="mhint" hidden>Toca dos puntos para medir · arrastra para girar · Esc para salir</div>
+    <div class="title-ov"><span class="k" id="tk">OPTION A</span><div class="tl"><h2 id="tt"></h2><span class="sep">·</span><span class="s" id="ts"></span></div></div>
+    <div class="hint">Arrastra para girar · rueda / pellizco para zoom</div>
+    <div class="sel" id="sel" hidden>
+      <div class="selh"><b id="selN"></b><span id="selP"></span></div>
+      <div class="selb"><button data-r="-15">⟲ 15°</button><button data-r="15">⟳ 15°</button><button data-r="90">⟳ 90°</button><button id="selDup">＋ Duplicar</button><button id="selDel">− Eliminar</button><button id="selHome">Original</button><button id="selX" aria-label="Cerrar">✕</button></div>
+    </div>
+  </div>
+    <!-- ---------- BOTONES: vistas (Main…Pavillon) + herramientas (Measure…Reset) ---------- -->
+    <div class="views" id="views">
+      <button data-v="main">Main</button>
+      <button data-v="aerial">Top</button>
+      <button data-v="front">Front</button>
+      <button data-v="side">Side</button>
+      <button data-v="hall">Pavillon</button>
+      <button id="measBtn" class="tool"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15.5 15.5 3 21 8.5 8.5 21z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 12l2 2M10 9l1.5 1.5M13 6l2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Measure (cm)</button>
+      <button id="measClr" hidden>Clear measures</button>
+      <button id="gridBtn" class="tool"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Grid 1 m</button>
+      <button id="zone">2 m zone</button>
+      <button id="rot">⟳ Rotate</button>
+      <button id="resetAll">Reset</button>
+    </div>
+  </div>
+  <!-- ---------- PANEL LATERAL: botón de captura + elementos clave ---------- -->
+  <aside><button class="shot" id="shotBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l2-2.5h6L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Enviar captura a GPworx</button>
+  <div class="shotbox" id="shotBox" hidden>
+    <img id="shotImg" alt="Captura de la configuración actual">
+    <p class="shotmsg" id="shotMsg" role="status"></p>
+    <div class="shotact"><button id="shotCancel" type="button">Cerrar</button></div>
+  </div>
+  <h3>ELEMENTOS CLAVE</h3><p class="lh">Los marcados con ✥ se pueden mover: tócalos aquí o en el 3D. Usa − y + para quitar o añadir unidades.</p><ol id="legend"></ol><div class="desc" id="desc"></div></aside>
+</div>
+<!-- ===================== FICHAS DESTACADAS ===================== -->
+<div class="strip" id="strip"></div>
+<!-- ===================== NORMATIVA DEL EVENTO ===================== -->
+<section class="norm"><h3>CUMPLIMIENTO NORMATIVA · EVENT 2027</h3><div class="ng" id="norm"></div><p>Stand isla de 96 m²: todos los lados abiertos. Altura estándar 2,5 m, hasta 3,5 m permitido; por encima solo según los puntos 4, 5 y 6. Tarima máx. 10 cm con rampa de acceso 1×1 m. Planos y alzados a la organización del evento; colgados solo con el proveedor oficial del recinto.</p></section>
+<!-- ===================== NOTA Y PIE ===================== -->
+<p class="note">Volumetría orientativa a escala aproximada (1 unidad = 1 m) para discutir la distribución; no es un render fotorrealista. Alturas y cerramientos (propios y de los stands vecinos) ajustados a la normativa de construcción de Event 2027; pendiente de validación por la organización del evento.</p>
+<div class="credit"><span style="color:#b4b6bc;font-size:17px;letter-spacing:.3px">Propuesta de diseño de stand de GPWORX · Stand - Event 2027</span></div>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script src="../js/three.min.js"></script>
+<script src="../js/images.js"></script>
+<script>window.GP_VIEW_ONLY=true; window.GP_SEND_ENDPOINT="../send.php"; // versión SOLO VISOR</script>
+<script src="../js/app.js"></script>
+
+
+</body></html>

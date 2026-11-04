@@ -17,7 +17,8 @@ El simulador debe generarse o guardarse dentro de `site/` para que se publique.
 
 | Archivo | Qué contiene |
 |---|---|
-| `index.html` | Estructura de la página por bloques: cabecera, visor 3D, botones, panel lateral, normativa y pie (cada bloque va marcado con un comentario) |
+| `design/index.html` | **Versión solo visor** (gpworx.com/designer/design/): mismos `css/` y `js/`, sin mover, girar ni cambiar cantidades |
+| `index.html` | Versión **editable**. Estructura de la página por bloques: cabecera, visor 3D, botones, panel lateral, normativa y pie (cada bloque va marcado con un comentario) |
 | `css/styles.css` | Todos los estilos, incluidos los de móvil y la protección (marca de agua, bloqueos) |
 | `js/app.js` | Lógica del simulador, dividida en secciones (ver el índice al principio del archivo) |
 | `js/images.js` | Imágenes de los gráficos del stand (base64) |
