@@ -1,0 +1,44 @@
+name: Publicar vista previa en gpworx.com/designer/bib
+
+# Copia de prueba de la rama biblioteca-elementos. No toca gpworx.com/designer ni gpworx.com/design.
+on:
+  push:
+    branches: [biblioteca-elementos]
+    paths: ['site/**', '.github/workflows/deploy-bib.yml']
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-hostalia
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Guardado aparte para la vista previa
+        run: |
+          sed -i 's#<script src="js/three.min.js"></script>#<script>window.GP_LS_KEY="dupontC-config-bib";</script>\n<script src="js/three.min.js"></script>#' site/index.html
+          grep -q 'GP_LS_KEY' site/index.html
+
+      - name: Preparar configuración de correo (desde los secretos)
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: |
+          if [ -n "$SMTP_PASSWORD" ]; then
+            php -r 'echo "<?php return ".var_export(["host"=>getenv("SMTP_HOST"),"user"=>getenv("SMTP_USER"),"pass"=>getenv("SMTP_PASSWORD")],true).";\n";' > site/mail-config.php
+            echo "mail-config.php generado"
+          fi
+
+      - name: Subir la carpeta site/ por FTP a gpworx.com/designer/bib
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./site/
+          server-dir: designer/bib/

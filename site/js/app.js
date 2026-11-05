@@ -456,7 +456,8 @@ let selBox=null;
 function setNdc(e){const r=canvas.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1);ray.setFromCamera(ndc,camera);}
 function pick(e){setNdc(e);const h=ray.intersectObjects(B.children,true);for(const x of h){if(!x.object.visible)continue;let o=x.object;while(o&&o.parent!==B)o=o.parent;return o&&MOV.includes(o)?o:null;}return null;}
 const LS='dupontC-config-v1';
-const LS2='dupontC-config-v2';let uid=0;
+// window.GP_LS_KEY permite que una copia de prueba (p. ej. designer/bib) guarde aparte y no toque los montajes de la principal
+const LS2=window.GP_LS_KEY||'dupontC-config-v2';let uid=0;
 function save(){if(VIEW_ONLY)return;try{localStorage.setItem(LS2,JSON.stringify(MOV.map(G=>({k:G.userData.key,s:G.userData.src,x:+G.position.x.toFixed(3),z:+G.position.z.toFixed(3),r:+G.rotation.y.toFixed(4)}))));}catch(_){}}
 function cloneOf(srcG,key){const G=srcG.clone(true);G.userData={key,src:srcG.userData.src,type:srcG.userData.type,name:'',home:{x:srcG.position.x,z:srcG.position.z,r:0}};return G;}
 function place(G,x,z,r){G.position.x=x;G.position.z=z;G.rotation.y=r||0;if(!B.children.includes(G))B.add(G);if(!MOV.includes(G))MOV.push(G);}
