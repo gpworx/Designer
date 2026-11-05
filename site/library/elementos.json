@@ -12,6 +12,7 @@
         "fondo": 2.95,
         "alto": 1.9
       },
+      "miniatura": "thumbs/demo.webp",
       "origen": "Option A · Dintel a Entrada"
     },
     {
@@ -25,6 +26,7 @@
         "fondo": 0.47,
         "alto": 1.76
       },
+      "miniatura": "thumbs/totem.webp",
       "origen": "Option A · Dintel a Entrada"
     },
     {
@@ -38,6 +40,7 @@
         "fondo": 1.54,
         "alto": 1
       },
+      "miniatura": "thumbs/rec.webp",
       "origen": "Option A · Dintel a Entrada"
     },
     {
@@ -51,6 +54,7 @@
         "fondo": 0.43,
         "alto": 1.38
       },
+      "miniatura": "thumbs/cesp.webp",
       "origen": "Option A · Dintel a Entrada"
     },
     {
@@ -64,6 +68,7 @@
         "fondo": 2.62,
         "alto": 3.5
       },
+      "miniatura": "thumbs/alm.webp",
       "origen": "Option A · Dintel a Entrada"
     },
     {
@@ -77,6 +82,7 @@
         "fondo": 2.69,
         "alto": 1
       },
+      "miniatura": "thumbs/bar.webp",
       "origen": "Option A · Dintel a Entrada"
     },
     {
@@ -90,6 +96,7 @@
         "fondo": 3.12,
         "alto": 2.52
       },
+      "miniatura": "thumbs/sala.webp",
       "origen": "Option A · Dintel a Entrada"
     },
     {
@@ -103,6 +110,7 @@
         "fondo": 1,
         "alto": 0.84
       },
+      "miniatura": "thumbs/jard.webp",
       "origen": "Option A · Dintel a Entrada"
     },
     {
@@ -116,6 +124,7 @@
         "fondo": 1.31,
         "alto": 0.96
       },
+      "miniatura": "thumbs/mesa.webp",
       "origen": "Option A · Dintel a Entrada"
     }
   ]

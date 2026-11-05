@@ -35,6 +35,8 @@ header p{margin:2px 0 0;color:var(--mut)}
 .vis img{width:100%;height:100%;object-fit:cover;display:block}
 .vis .tag{position:absolute;right:6px;bottom:6px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;padding:2px 6px;border-radius:3px}
 .vis svg{width:100%;height:100%;display:block}
+#g-elementos .vis{aspect-ratio:4/3;background:#2a2b2e}
+#g-elementos .vis img{object-fit:contain}
 .b{padding:10px 12px 12px;display:grid;gap:3px;flex:1}
 .code{font:bold 12px/1.2 Menlo,Consolas,monospace;color:var(--sel);font-variant-numeric:tabular-nums}
 .n{font-weight:bold}
@@ -45,6 +47,7 @@ header p{margin:2px 0 0;color:var(--mut)}
 .act a:hover,.act button:hover{text-decoration:underline}
 .empty{color:var(--mut);padding:30px 0}
 .note{color:var(--mut);font-size:12px;margin-top:22px;max-width:70ch}
+@media (max-width:600px){header img{height:36px}header .t{flex:1 1 calc(100% - 60px)}h1{font-size:18px}.back{margin-left:52px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.b{padding:8px 9px 10px}.tabs a{padding:10px 12px}}
 @media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}.card:hover{border-color:#55575e}}
 </style>
 </head>
@@ -64,7 +67,7 @@ header p{margin:2px 0 0;color:var(--mut)}
   <section id="p-elementos" role="tabpanel" aria-labelledby="tab-elementos">
     <div class="bar"><input id="q-elementos" type="search" placeholder="Buscar elemento…" aria-label="Buscar elemento"><span id="f-elementos"></span></div>
     <div class="grid" id="g-elementos"></div>
-    <p class="note">Planta a escala sobre cuadrícula de 50 cm. Las medidas son la caja envolvente de la pieza tal como está colocada en el diseño original. Desde el simulador se incorporan con <code>GPLIB.add('id')</code>.</p>
+    <p class="note">Vista 3D con el ángulo de la vista principal del simulador; pulsa la imagen para ver la planta a escala sobre cuadrícula de 50 cm. Las medidas son la caja envolvente de la pieza tal como está colocada en el diseño original. Desde el simulador se incorporan con <code>GPLIB.add('id')</code>.</p>
   </section>
 
   <section id="p-texturas" role="tabpanel" aria-labelledby="tab-texturas" hidden>
@@ -107,10 +110,12 @@ function draw(kind){const g=$('g-'+kind),L=st[kind].data.filter(d=>match(kind,d)
   if(!L.length){g.innerHTML='<p class="empty">Ningún resultado con ese filtro.</p>';return;}
   L.forEach(d=>{const c=document.createElement('article');c.className='card';
     if(kind==='elementos'){
-      c.innerHTML=`<div class="vis" aria-hidden="false">${plan(d)}</div><div class="b"><span class="code">${esc(d.id)}</span><span class="n">${esc(d.nombre)}</span>
+      c.innerHTML=`<button type="button" class="vis" aria-label="Alternar vista 3D y planta de ${esc(d.nombre)}">${d.miniatura?`<img loading="lazy" alt="" src="${esc(d.miniatura)}">`:plan(d)}<span class="tag">${d.miniatura?'3D':'planta'}</span></button><div class="b"><span class="code">${esc(d.id)}</span><span class="n">${esc(d.nombre)}</span>
         <span class="d">${esc(d.descripcion)}</span><span class="m">${num(d.medidas.ancho)} × ${num(d.medidas.fondo)} m · alto ${num(d.medidas.alto)} m</span>
         <span class="d">${esc(CAT_EL[d.categoria]||d.categoria)}</span><div class="act"></div></div>`;
       c.querySelector('.act').append(copyBtn(d.id));
+      if(d.miniatura){const v=c.querySelector('.vis'),tag=v.querySelector('.tag');let three=true;
+        v.onclick=()=>{three=!three;v.innerHTML=(three?`<img alt="" src="${esc(d.miniatura)}">`:plan(d))+`<span class="tag">${three?'3D':'planta'}</span>`;};}
     }else{
       c.innerHTML=`<button type="button" class="vis" aria-label="Alternar tablero y detalle de ${esc(d.nombre)}" style="background:${esc(d.fallbackColor)}"><img loading="lazy" alt="" src="${esc(d.images.board.thumb)}"><span class="tag">tablero</span></button>
         <div class="b"><span class="code">${esc(d.code)} ${esc(d.texture)}</span><span class="n">${esc(d.nombre)}</span>

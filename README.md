@@ -53,6 +53,7 @@ GPLIB.add('cesp')                    // añade uno junto al último del mismo ti
 GPLIB.add('cesp', {x: 1, z: 0.5, r: 0}) // en metros desde el centro del stand, r en radianes
 GPLIB.remove('cesp')                 // quita el seleccionado o el último de ese tipo
 GPLIB.toJSON()                       // catálogo en JSON (es lo que hay en library/elementos.json)
+GPLIB.thumb('cesp', {w: 640, h: 480}) // miniatura 3D (webp) con las luces y el ángulo de la vista principal
 ```
 
 | id | Elemento | Categoría |
@@ -74,6 +75,10 @@ Para añadir una pieza nueva a la biblioteca: créala con `mov('clave','Nombre',
 añade su tipo en `TYPEOF` y `TYPES`, su línea en la leyenda (`DATA.C.m`) y su
 categoría y descripción en `LIB_META`. Después regenera `library/elementos.json`
 con la salida de `GPLIB.toJSON()`.
+
+Las miniaturas de `library/thumbs/` se generan con `GPLIB.thumb(id, {w: 640, h: 480})`:
+abre el simulador, ejecútalo en la consola para cada pieza y guarda la imagen como
+`library/thumbs/<id>.webp`. Hay que regenerarlas si cambia el aspecto de una pieza.
 
 Las dos plantas de césped (`g1`, `g2`) iban antes dentro del mostrador de recepción.
 Los montajes guardados en el navegador antes del cambio las recolocan solas junto

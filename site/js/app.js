@@ -425,7 +425,7 @@ const LIB={};
 ORIG.forEach(G=>{const t=G.userData.type;if(LIB[t])return;
   const bb=new T.Box3().setFromObject(G),s=bb.getSize(new T.Vector3()),r2=v=>Math.round(v*100)/100,meta=LIB_META[t]||{};
   LIB[t]={id:t,nombre:TYPES[t],categoria:meta.cat||'otros',descripcion:meta.desc||'',plantilla:G.userData.key,
-    medidas:{ancho:r2(s.x),fondo:r2(s.z),alto:r2(bb.max.y-0.1)},origen:'Option A · Dintel a Entrada'};});
+    medidas:{ancho:r2(s.x),fondo:r2(s.z),alto:r2(bb.max.y-0.1)},miniatura:'thumbs/'+t+'.webp',origen:'Option A · Dintel a Entrada'};});
 
 
 // ---------- RAI 2 m zone overlay ----------
@@ -586,7 +586,32 @@ window.GPLIB={
     G.userData.home={x:G.position.x,z:G.position.z,r:0};renameAll();save();refresh();select(G);return G.userData.key;},
   remove(id){if(!VIEW_ONLY&&LIB[id])removeOf(id);},
   toJSON:()=>JSON.stringify({version:1,elementos:Object.values(LIB)},null,2),
+  // miniatura 3D de una pieza sola: mismas luces y materiales que el visor y el ángulo de la vista principal.
+  // Devuelve un data URL (webp). Útil para la biblioteca y para el modo editor.
+  thumb:(id,o)=>libThumb(id,o),
 };
+let thumbR=null;
+function libThumb(id,{w=480,h=360,type='image/webp',quality=0.9,bg=0x2a2b2e}={}){const e=LIB[id];if(!e)return null;
+  if(!thumbR){const c=document.createElement('canvas');thumbR=new T.WebGLRenderer({canvas:c,antialias:true,preserveDrawingBuffer:true,alpha:false});
+    thumbR.shadowMap.enabled=true;thumbR.shadowMap.type=T.PCFSoftShadowMap;thumbR.outputEncoding=T.sRGBEncoding;thumbR.setPixelRatio(1);}
+  thumbR.setSize(w,h,false);
+  const S=new T.Scene();S.background=new T.Color(bg);
+  S.add(new T.HemisphereLight(0xdfe9ff,0x1a2233,0.75));
+  const G=TEMPL[e.plantilla].clone(true);G.position.set(0,0,0);G.rotation.set(0,0,0);S.add(G);G.updateMatrixWorld(true);
+  const bb=new T.Box3().setFromObject(G),ctr=bb.getCenter(new T.Vector3()),rad=Math.max(0.3,bb.getBoundingSphere(new T.Sphere()).radius);
+  const L=new T.DirectionalLight(0xffffff,0.75);L.position.copy(ctr).add(new T.Vector3(8,18,10).normalize().multiplyScalar(rad*6));L.target.position.copy(ctr);
+  L.castShadow=true;L.shadow.mapSize.set(2048,2048);Object.assign(L.shadow.camera,{left:-rad*1.6,right:rad*1.6,top:rad*1.6,bottom:-rad*1.6,near:0.1,far:rad*14});L.shadow.bias=-0.0005;S.add(L,L.target);
+  const F=new T.DirectionalLight(0x9cc4ff,0.25);F.position.set(-10,8,-6);S.add(F);
+  // suelo que solo recibe la sombra, a la altura de la tarima (0,1 m)
+  const fl=new T.Mesh(new T.PlaneGeometry(rad*12,rad*12),new T.ShadowMaterial({opacity:0.35}));fl.rotation.x=-Math.PI/2;fl.position.set(ctr.x,0.1,ctr.z);fl.receiveShadow=true;S.add(fl);
+  // cámara con los ángulos de la vista principal (VIEWS.main), lente larga para un aspecto casi isométrico
+  const [th0,ph0]=VIEWS.main,fov=24,cam=new T.PerspectiveCamera(fov,w/h,0.05,rad*40);
+  const dir=new T.Vector3(Math.sin(ph0)*Math.sin(th0),Math.cos(ph0),Math.sin(ph0)*Math.cos(th0));
+  const vf=fov*Math.PI/360,hf=Math.atan(Math.tan(vf)*w/h),dist=rad*1.08/Math.sin(Math.min(vf,hf));
+  cam.position.copy(ctr).addScaledVector(dir,dist);cam.lookAt(ctr);
+  thumbR.render(S,cam);const url=thumbR.domElement.toDataURL(type,quality);
+  S.remove(G);fl.geometry.dispose();fl.material.dispose();
+  return url;}
 
 
 // ---------- captura + envío directo ----------
