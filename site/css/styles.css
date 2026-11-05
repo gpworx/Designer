@@ -135,3 +135,8 @@ body.shield .stage canvas,body.shield #markers,body.shield #mlabels,body.shield 
 /* ---------- modo solo lectura (design/) ---------- */
 .view-only #resetAll,.view-only #sel,.view-only aside .lh{display:none!important}
 .view-only .views button[data-v="hall"]{margin-right:10px}
+
+/* acceso a la biblioteca (elementos / texturas) junto a las herramientas */
+.views a#libBtn{display:inline-flex;align-items:center;gap:6px;background:var(--navy2);color:var(--txt);border:1px solid #45474d;border-radius:999px;padding:7px 12px;font-weight:bold;font-size:12px;text-decoration:none}
+.views a#libBtn:hover,.views a#libBtn:focus-visible{border-color:#6a6c73;outline:none}
+.views a#libBtn svg{width:15px;height:15px}

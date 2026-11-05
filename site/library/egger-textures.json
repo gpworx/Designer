@@ -1,0 +1,1233 @@
+{
+  "source": "EGGER Decorative Collection — imágenes públicas de egger.com (cdn.egger.com)",
+  "collected": "2026-11-05",
+  "notes": [
+    "board: escaneo del tablero completo (aprox. 2311 x 1300 mm). Úsalo para paneles grandes: sin repeticiones visibles.",
+    "decor: detalle de 297 x 167 mm. Repetir (wrap) en piezas pequeñas o como textura de detalle.",
+    "fallbackColor es una aproximación para mostrar algo mientras carga la imagen; en unis viene de la referencia NCS/RAL de EGGER.",
+    "Comprueba disponibilidad en tablero melamínico (Eurodekor) para tu país en la ficha 'page' antes de presupuestar."
+  ],
+  "categories": {
+    "uni": "Unicolores",
+    "madera": "Maderas",
+    "material": "Materiales"
+  },
+  "decors": [
+    {
+      "id": "W1000_ST9",
+      "code": "W1000",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Premium White",
+      "nombre": "Blanco Premium",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#F4F4F1",
+      "ncs": "S0502-G",
+      "ral": "9003",
+      "local": {
+        "board": "textures/W1000_ST9_board.jpg",
+        "decor": "textures/W1000_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854478520350/8854478553118/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854478520350/8854478553118/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854478520350/8854478553118/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854478389278/8855434395678/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854478389278/8855434395678/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854478389278/8855434395678/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/W1000_9?country=GB"
+    },
+    {
+      "id": "W980_ST9",
+      "code": "W980",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Platinum White",
+      "nombre": "Blanco Platino",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#F1F0EA",
+      "ncs": "S0601-Y",
+      "ral": "9016",
+      "local": {
+        "board": "textures/W980_ST9_board.jpg",
+        "decor": "textures/W980_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8861892608030/8861892640798/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8861892608030/8861892640798/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8861892608030/8861892640798/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8861892542494/8861892575262/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8861892542494/8861892575262/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8861892542494/8861892575262/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/W980_9?country=SE"
+    },
+    {
+      "id": "U775_ST9",
+      "code": "U775",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "White Grey",
+      "nombre": "Gris Blanco",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#E3E1D9",
+      "ncs": "S1002-Y",
+      "ral": "9002",
+      "local": {
+        "board": "textures/U775_ST9_board.jpg",
+        "decor": "textures/U775_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854462726174/8854559686686/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854462726174/8854559686686/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854462726174/8854559686686/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854462595102/8855433084958/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854462595102/8855433084958/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854462595102/8855433084958/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/U775_9?country=IE"
+    },
+    {
+      "id": "U7081_ST9",
+      "code": "U7081",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Solid Light Grey",
+      "nombre": "Gris Claro",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#CFCFCB",
+      "ncs": "S2002-G50Y",
+      "ral": "7047",
+      "local": {
+        "board": "textures/U7081_ST9_board.jpg",
+        "decor": "textures/U7081_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854454861854/8854557523998/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854454861854/8854557523998/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854454861854/8854557523998/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854454730782/8855432429598/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854454730782/8855432429598/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854454730782/8855432429598/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/U7081_9"
+    },
+    {
+      "id": "U960_ST9",
+      "code": "U960",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Onyx Grey",
+      "nombre": "Gris Ónix",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#5F6061",
+      "ncs": "S6500-N",
+      "ral": null,
+      "local": {
+        "board": "textures/U960_ST9_board.jpg",
+        "decor": "textures/U960_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854467117086/8854560571422/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854467117086/8854560571422/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854467117086/8854560571422/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854466986014/8855433445406/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854466986014/8855433445406/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854466986014/8855433445406/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/U960_9?country=GB"
+    },
+    {
+      "id": "U999_ST12",
+      "code": "U999",
+      "texture": "ST12",
+      "textureName": "Omnipore Matt",
+      "name": "Black",
+      "nombre": "Negro",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#1E1E1F",
+      "ncs": "S9000-N",
+      "ral": "9011",
+      "local": {
+        "board": "textures/U999_ST12_board.jpg",
+        "decor": "textures/U999_ST12_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854472228894/8854472261662/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854472228894/8854472261662/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854472228894/8854472261662/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854472097822/8855433871390/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854472097822/8855433871390/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854472097822/8855433871390/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/U999_12?country=BT"
+    },
+    {
+      "id": "U565_ST9",
+      "code": "U565",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Ocean Blue",
+      "nombre": "Azul Océano",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#2F4A5E",
+      "ncs": "S6020-B",
+      "ral": null,
+      "local": {
+        "board": "textures/U565_ST9_board.jpg",
+        "decor": "textures/U565_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854552248350/8854552281118/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854552248350/8854552281118/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854552248350/8854552281118/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854552117278/8855314726942/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854552117278/8855314726942/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854552117278/8855314726942/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/U565_9?country=GB"
+    },
+    {
+      "id": "U504_ST9",
+      "code": "U504",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Tyrolean Blue",
+      "nombre": "Azul Tirol",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#2E4566",
+      "ncs": "S6020-R90B",
+      "ral": "5000",
+      "local": {
+        "board": "textures/U504_ST9_board.jpg",
+        "decor": "textures/U504_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854439526430/8854550773790/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854439526430/8854550773790/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854439526430/8854550773790/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854439395358/8855431151646/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854439395358/8855431151646/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854439395358/8855431151646/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/U504_9?country=GB"
+    },
+    {
+      "id": "U335_ST9",
+      "code": "U335",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Rusty Red",
+      "nombre": "Rojo Óxido",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#7A3E36",
+      "ncs": "S5020-Y90R",
+      "ral": null,
+      "local": {
+        "board": "textures/U335_ST9_board.jpg",
+        "decor": "textures/U335_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854549331998/8854549364766/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854549331998/8854549364766/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854549331998/8854549364766/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854549200926/8855314202654/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854549200926/8855314202654/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854549200926/8855314202654/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/U335_9?country=GB"
+    },
+    {
+      "id": "U114_ST9",
+      "code": "U114",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Brilliant Yellow",
+      "nombre": "Amarillo Brillante",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#EDC23A",
+      "ncs": "S1060-Y10R",
+      "ral": null,
+      "local": {
+        "board": "textures/U114_ST9_board.jpg",
+        "decor": "textures/U114_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854426157086/8854546710558/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854426157086/8854546710558/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854426157086/8854546710558/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854426026014/8855430037534/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854426026014/8855430037534/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854426026014/8855430037534/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/U114_9?country=IE"
+    },
+    {
+      "id": "U125_ST9",
+      "code": "U125",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Sand Yellow",
+      "nombre": "Amarillo Arena",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#D2B98D",
+      "ncs": "S2020-Y20R",
+      "ral": "1001",
+      "local": {
+        "board": "textures/U125_ST9_board.jpg",
+        "decor": "textures/U125_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854547333150/8854547365918/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854547333150/8854547365918/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854547333150/8854547365918/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854547202078/8855313743902/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854547202078/8855313743902/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854547202078/8855313743902/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/U125_9?country=SE"
+    },
+    {
+      "id": "U606_ST9",
+      "code": "U606",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Forest Green",
+      "nombre": "Verde Bosque",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#24392F",
+      "ncs": "S7020-B90G",
+      "ral": "6005",
+      "local": {
+        "board": "textures/U606_ST9_board.jpg",
+        "decor": "textures/U606_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854444638238/8854553559070/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854444638238/8854553559070/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854444638238/8854553559070/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854444507166/8855431577630/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854444507166/8855431577630/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854444507166/8855431577630/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/U606_9?country=GB"
+    },
+    {
+      "id": "U636_ST9",
+      "code": "U636",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Fjord Green",
+      "nombre": "Verde Fiordo",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#7F8B86",
+      "ncs": "S4005-B80G",
+      "ral": null,
+      "local": {
+        "board": "textures/U636_ST9_board.jpg",
+        "decor": "textures/U636_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854446997534/8854554050590/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854446997534/8854554050590/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854446997534/8854554050590/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854446866462/8855431774238/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854446866462/8855431774238/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854446866462/8855431774238/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/U636_9?country=GB"
+    },
+    {
+      "id": "U665_ST9",
+      "code": "U665",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Stone Green",
+      "nombre": "Verde Piedra",
+      "category": "uni",
+      "directional": false,
+      "fallbackColor": "#3F4846",
+      "ncs": "S7005-B50G",
+      "ral": null,
+      "local": {
+        "board": "textures/U665_ST9_board.jpg",
+        "decor": "textures/U665_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854555492382/8854555525150/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854555492382/8854555525150/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854555492382/8854555525150/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854555361310/8855315283998/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854555361310/8855315283998/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854555361310/8855315283998/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/U665_9?country=GB"
+    },
+    {
+      "id": "H3303_ST10",
+      "code": "H3303",
+      "texture": "ST10",
+      "textureName": "Deepskin Rough",
+      "name": "Natural Hamilton Oak",
+      "nombre": "Roble Hamilton Natural",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#B58A5C",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H3303_ST10_board.jpg",
+        "decor": "textures/H3303_ST10_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854408855582/8854540419102/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854408855582/8854540419102/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854408855582/8854540419102/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854408724510/8854540386334/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854408724510/8854540386334/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854408724510/8854540386334/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H3303_10?country=US"
+    },
+    {
+      "id": "H1113_ST10",
+      "code": "H1113",
+      "texture": "ST10",
+      "textureName": "Deepskin Rough",
+      "name": "Brown Kansas Oak",
+      "nombre": "Roble Kansas Marrón",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#7A5539",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H1113_ST10_board.jpg",
+        "decor": "textures/H1113_ST10_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854361178142/8854521380894/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854361178142/8854521380894/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854361178142/8854521380894/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854361047070/8854521348126/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854361047070/8854521348126/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854361047070/8854521348126/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H1113_10?country=AL"
+    },
+    {
+      "id": "H2033_ST10",
+      "code": "H2033",
+      "texture": "ST10",
+      "textureName": "Deepskin Rough",
+      "name": "Dark Hunton Oak",
+      "nombre": "Roble Hunton Oscuro",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#4F3B2C",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H2033_ST10_board.jpg",
+        "decor": "textures/H2033_ST10_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854392242206/8854534455326/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854392242206/8854534455326/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854392242206/8854534455326/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854392111134/8854534422558/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854392111134/8854534422558/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854392111134/8854534422558/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H2033_10?country=GB"
+    },
+    {
+      "id": "H1399_ST10",
+      "code": "H1399",
+      "texture": "ST10",
+      "textureName": "Deepskin Rough",
+      "name": "Truffle Brown Denver Oak",
+      "nombre": "Roble Denver Trufa",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#5C4433",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H1399_ST10_board.jpg",
+        "decor": "textures/H1399_ST10_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854380052510/8854531014686/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854380052510/8854531014686/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854380052510/8854531014686/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854379921438/8854530981918/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854379921438/8854530981918/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854379921438/8854530981918/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H1399_10?country=AM"
+    },
+    {
+      "id": "H3331_ST10",
+      "code": "H3331",
+      "texture": "ST10",
+      "textureName": "Deepskin Rough",
+      "name": "Natural Nebraska Oak",
+      "nombre": "Roble Nebraska Natural",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#B99671",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H3331_ST10_board.jpg",
+        "decor": "textures/H3331_ST10_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854411214878/8854541795358/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854411214878/8854541795358/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854411214878/8854541795358/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854411083806/8854541762590/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854411083806/8854541762590/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854411083806/8854541762590/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H3331_10?country=AL"
+    },
+    {
+      "id": "H3332_ST10",
+      "code": "H3332",
+      "texture": "ST10",
+      "textureName": "Deepskin Rough",
+      "name": "Grey Nebraska Oak",
+      "nombre": "Roble Nebraska Gris",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#8E8172",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H3332_ST10_board.jpg",
+        "decor": "textures/H3332_ST10_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854411608094/8854541893662/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854411608094/8854541893662/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854411608094/8854541893662/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854411477022/8854541860894/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854411477022/8854541860894/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854411477022/8854541860894/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H3332_10?country=GB"
+    },
+    {
+      "id": "H1146_ST10",
+      "code": "H1146",
+      "texture": "ST10",
+      "textureName": "Deepskin Rough",
+      "name": "Grey Bardolino Oak",
+      "nombre": "Roble Bardolino Gris",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#9A8B78",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H1146_ST10_board.jpg",
+        "decor": "textures/H1146_ST10_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8860194406430/8860194439198/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8860194406430/8860194439198/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8860194406430/8860194439198/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8860194308126/8860194340894/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8860194308126/8860194340894/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8860194308126/8860194340894/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H1146_10?country=IE"
+    },
+    {
+      "id": "H1330_ST10",
+      "code": "H1330",
+      "texture": "ST10",
+      "textureName": "Deepskin Rough",
+      "name": "Vintage Santa Fe Oak",
+      "nombre": "Roble Santa Fe Vintage",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#A07F5E",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H1330_ST10_board.jpg",
+        "decor": "textures/H1330_ST10_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854375333918/8854527803422/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854375333918/8854527803422/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854375333918/8854527803422/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854375202846/8854527770654/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854375202846/8854527770654/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854375202846/8854527770654/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H1330_10?country=GB"
+    },
+    {
+      "id": "H3730_ST10",
+      "code": "H3730",
+      "texture": "ST10",
+      "textureName": "Deepskin Rough",
+      "name": "Natural Hickory",
+      "nombre": "Nogal Americano Natural",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#B0875E",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H3730_ST10_board.jpg",
+        "decor": "textures/H3730_ST10_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854421045278/8854545334302/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854421045278/8854545334302/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854421045278/8854545334302/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854420914206/8854545301534/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854420914206/8854545301534/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854420914206/8854545301534/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H3730_10?country=GB"
+    },
+    {
+      "id": "H1176_ST37",
+      "code": "H1176",
+      "texture": "ST37",
+      "textureName": "Feelwood Rift",
+      "name": "White Halifax Oak",
+      "nombre": "Roble Halifax Blanco",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#D8CBB8",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H1176_ST37_board.jpg",
+        "decor": "textures/H1176_ST37_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854365110302/8854522658846/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854365110302/8854522658846/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854365110302/8854522658846/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854364979230/8854522626078/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854364979230/8854522626078/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854364979230/8854522626078/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H1176_37"
+    },
+    {
+      "id": "H1714_ST19",
+      "code": "H1714",
+      "texture": "ST19",
+      "textureName": "Deepskin Excellent",
+      "name": "Lincoln Walnut",
+      "nombre": "Nogal Lincoln",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#6B4A34",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H1714_ST19_board.jpg",
+        "decor": "textures/H1714_ST19_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854386737182/8854531801118/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854386737182/8854531801118/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854386737182/8854531801118/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854386606110/8854531768350/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854386606110/8854531768350/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854386606110/8854531768350/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H1714_19?country=US"
+    },
+    {
+      "id": "H3710_ST9",
+      "code": "H3710",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Natural Carini Walnut",
+      "nombre": "Nogal Carini Natural",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#7A5A40",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H3710_ST9_board.jpg",
+        "decor": "textures/H3710_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854420652062/8854545235998/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854420652062/8854545235998/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854420652062/8854545235998/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854420520990/8854545203230/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854420520990/8854545203230/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854420520990/8854545203230/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H3710_9?country=GB"
+    },
+    {
+      "id": "H3734_ST9",
+      "code": "H3734",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Natural Dijon Walnut",
+      "nombre": "Nogal Dijon Natural",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#8A6245",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H3734_ST9_board.jpg",
+        "decor": "textures/H3734_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854421438494/8854545432606/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854421438494/8854545432606/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854421438494/8854545432606/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854421307422/8854545399838/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854421307422/8854545399838/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854421307422/8854545399838/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H3734_9?country=GB"
+    },
+    {
+      "id": "H3702_ST10",
+      "code": "H3702",
+      "texture": "ST10",
+      "textureName": "Deepskin Rough",
+      "name": "Tobacco Pacific Walnut",
+      "nombre": "Nogal Pacific Tabaco",
+      "category": "madera",
+      "directional": true,
+      "fallbackColor": "#5E4331",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/H3702_ST10_board.jpg",
+        "decor": "textures/H3702_ST10_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854419865630/8854545039390/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854419865630/8854545039390/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854419865630/8854545039390/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854419734558/8854545006622/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854419734558/8854545006622/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854419734558/8854545006622/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/H3702_10?country=GB"
+    },
+    {
+      "id": "F186_ST9",
+      "code": "F186",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Light Grey Chicago Concrete",
+      "nombre": "Hormigón Chicago Gris Claro",
+      "category": "material",
+      "directional": true,
+      "fallbackColor": "#A9A7A2",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/F186_ST9_board.jpg",
+        "decor": "textures/F186_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854324805662/8854505521182/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854324805662/8854505521182/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854324805662/8854505521182/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854324674590/8854505488414/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854324674590/8854505488414/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854324674590/8854505488414/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/F186_9?country=GB"
+    },
+    {
+      "id": "F187_ST9",
+      "code": "F187",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Dark Grey Chicago Concrete",
+      "nombre": "Hormigón Chicago Gris Oscuro",
+      "category": "material",
+      "directional": true,
+      "fallbackColor": "#6E6C69",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/F187_ST9_board.jpg",
+        "decor": "textures/F187_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854325198878/8854505816094/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854325198878/8854505816094/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854325198878/8854505816094/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854325067806/8854505783326/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854325067806/8854505783326/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854325067806/8854505783326/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/F187_9?country=NE"
+    },
+    {
+      "id": "F275_ST9",
+      "code": "F275",
+      "texture": "ST9",
+      "textureName": "Smoothtouch Matt",
+      "name": "Dark Concrete",
+      "nombre": "Hormigón Oscuro",
+      "category": "material",
+      "directional": true,
+      "fallbackColor": "#4E4D4B",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/F275_ST9_board.jpg",
+        "decor": "textures/F275_ST9_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8860185985054/8860186017822/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8860185985054/8860186017822/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8860185985054/8860186017822/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8860185886750/8860185919518/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8860185886750/8860185919518/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8860185886750/8860185919518/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/F275_9?country=EG"
+    },
+    {
+      "id": "F243_ST76",
+      "code": "F243",
+      "texture": "ST76",
+      "textureName": "Mineral Rough Matt",
+      "name": "Light Grey Candela Marble",
+      "nombre": "Mármol Candela Gris Claro",
+      "category": "material",
+      "directional": true,
+      "fallbackColor": "#D3D1CC",
+      "ncs": null,
+      "ral": null,
+      "local": {
+        "board": "textures/F243_ST76_board.jpg",
+        "decor": "textures/F243_ST76_decor.jpg"
+      },
+      "images": {
+        "board": {
+          "src": "https://cdn.egger.com/img/pim/8854512009246/8854512042014/original.jpg?width=2048&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854512009246/8854512042014/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854512009246/8854512042014/original.jpg?width=512&srcext=png",
+          "sizeMm": [
+            2311,
+            1300
+          ]
+        },
+        "decor": {
+          "src": "https://cdn.egger.com/img/pim/8854511878174/8854511910942/original.jpg?width=1024&srcext=png",
+          "srcFull": "https://cdn.egger.com/img/pim/8854511878174/8854511910942/original.png",
+          "thumb": "https://cdn.egger.com/img/pim/8854511878174/8854511910942/original.jpg?width=256&srcext=png",
+          "sizeMm": [
+            297,
+            167
+          ]
+        }
+      },
+      "page": "https://www.egger.com/en/furniture-interior-design/decors/F243_76?country=PF"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Biblioteca GPworx · Stand Configurator</title>
+<meta name="theme-color" content="#222222">
+<style>
+/* Biblioteca: pestañas Elementos / Texturas sobre la misma paleta oscura del simulador */
+:root{color-scheme:dark;--bg:#222222;--card:#2c2d30;--line:#3a3b40;--txt:#eaf1ff;--mut:#a4a6ad;--blue:#5d729e;--led:#3d9bff;--sel:#ffb020}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.45 Helvetica,Arial,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding-block:18px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header img{height:46px;width:auto}
+header .t{flex:1;min-width:0}
+h1{margin:0;font-size:20px;letter-spacing:.5px;text-wrap:balance}
+header p{margin:2px 0 0;color:var(--mut)}
+.back{color:var(--txt);text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:7px 12px;white-space:nowrap}
+.back:hover,.back:focus-visible{border-color:var(--led);outline:none}
+.tabs{display:flex;gap:4px;margin:22px 0 0;border-bottom:1px solid var(--line)}
+.tabs a{color:var(--mut);text-decoration:none;padding:10px 16px;border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:bold;letter-spacing:.4px;text-transform:uppercase;font-size:13px}
+.tabs a[aria-selected=true]{color:var(--txt);border-color:var(--sel)}
+.tabs a:focus-visible{outline:2px solid var(--led);outline-offset:-2px}
+.tabs i{font-style:normal;color:var(--mut);font-weight:normal;margin-left:6px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0}
+.bar input{flex:1 1 220px;min-width:0;background:var(--card);border:1px solid var(--line);color:var(--txt);border-radius:4px;padding:8px 10px;font:inherit}
+.bar input:focus{outline:none;border-color:var(--led)}
+.chip{background:transparent;border:1px solid var(--line);color:var(--txt);border-radius:999px;padding:6px 12px;font:inherit;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--blue);border-color:var(--blue)}
+.chip:focus-visible{outline:2px solid var(--led)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.vis{aspect-ratio:16/10;max-width:100%;background:#1a1b1d;position:relative;display:block;border:0;padding:0;width:100%;cursor:pointer}
+.vis img{width:100%;height:100%;object-fit:cover;display:block}
+.vis .tag{position:absolute;right:6px;bottom:6px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;padding:2px 6px;border-radius:3px}
+.vis svg{width:100%;height:100%;display:block}
+.b{padding:10px 12px 12px;display:grid;gap:3px;flex:1}
+.code{font:bold 12px/1.2 Menlo,Consolas,monospace;color:var(--sel);font-variant-numeric:tabular-nums}
+.n{font-weight:bold}
+.d,.m{color:var(--mut);font-size:12.5px}
+.m{font-variant-numeric:tabular-nums}
+.act{display:flex;gap:10px;align-items:center;margin-top:6px;flex-wrap:wrap}
+.act a,.act button{color:var(--led);background:none;border:0;padding:0;font:inherit;font-size:12.5px;cursor:pointer;text-decoration:none}
+.act a:hover,.act button:hover{text-decoration:underline}
+.empty{color:var(--mut);padding:30px 0}
+.note{color:var(--mut);font-size:12px;margin-top:22px;max-width:70ch}
+@media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}.card:hover{border-color:#55575e}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="../logo-gpworx.svg" alt="GPWORX Creative Communication">
+    <div class="t"><h1>Biblioteca del configurador</h1><p>Elementos 3D reutilizables y texturas de tablero EGGER</p></div>
+    <a class="back" href="../">← Volver al simulador</a>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <a href="#elementos" role="tab" id="tab-elementos" aria-controls="p-elementos">Elementos<i id="n-elementos"></i></a>
+    <a href="#texturas" role="tab" id="tab-texturas" aria-controls="p-texturas">Texturas<i id="n-texturas"></i></a>
+  </nav>
+
+  <section id="p-elementos" role="tabpanel" aria-labelledby="tab-elementos">
+    <div class="bar"><input id="q-elementos" type="search" placeholder="Buscar elemento…" aria-label="Buscar elemento"><span id="f-elementos"></span></div>
+    <div class="grid" id="g-elementos"></div>
+    <p class="note">Planta a escala sobre cuadrícula de 50 cm. Las medidas son la caja envolvente de la pieza tal como está colocada en el diseño original. Desde el simulador se incorporan con <code>GPLIB.add('id')</code>.</p>
+  </section>
+
+  <section id="p-texturas" role="tabpanel" aria-labelledby="tab-texturas" hidden>
+    <div class="bar"><input id="q-texturas" type="search" placeholder="Buscar por código o nombre…" aria-label="Buscar textura"><span id="f-texturas"></span></div>
+    <div class="grid" id="g-texturas"></div>
+    <p class="note">Imágenes públicas de egger.com. Pulsa una muestra para alternar entre tablero completo (2311 × 1300 mm) y detalle (297 × 167 mm). Comprueba la disponibilidad como tablero melamínico en la ficha EGGER antes de presupuestar.</p>
+  </section>
+</div>
+
+<script>
+(function(){
+const CAT_EL={mostrador:'Mostradores y barras',estructura:'Estructuras y salas',senal:'Señalética',mobiliario:'Mobiliario',vegetacion:'Vegetación'};
+const CAT_TX={uni:'Unicolores',madera:'Maderas',material:'Materiales'};
+const st={elementos:{cat:'',q:'',data:[]},texturas:{cat:'',q:'',data:[]}};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=v=>v.toFixed(2).replace('.',',');
+
+// planta a escala: cuadrícula de 0,5 m, caja de ancho × fondo centrada
+function plan(e){const W=320,H=200,pad=18,a=e.medidas.ancho,f=e.medidas.fondo,s=Math.min((W-2*pad)/Math.max(a,1),(H-2*pad)/Math.max(f,1));
+  let g='';const step=0.5*s;for(let x=W/2%step;x<W;x+=step)g+=`<line x1="${x}" y1="0" x2="${x}" y2="${H}"/>`;for(let y=H/2%step;y<H;y+=step)g+=`<line x1="0" y1="${y}" x2="${W}" y2="${y}"/>`;
+  const w=a*s,h=f*s,x=(W-w)/2,y=(H-h)/2;
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Planta ${num(a)} × ${num(f)} m"><g stroke="#33353a" stroke-width="1">${g}</g>
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#5d729e" fill-opacity=".35" stroke="#8fa3cc" stroke-width="1.5" rx="2"/>
+    <text x="${W/2}" y="${y-5}" fill="#a4a6ad" font-size="11" text-anchor="middle">${num(a)} m</text>
+    <text x="${x+w+5}" y="${H/2+4}" fill="#a4a6ad" font-size="11">${num(f)} m</text></svg>`;}
+
+function chips(kind,cats){const el=$('f-'+kind);el.innerHTML='';[['','Todos'],...Object.entries(cats)].forEach(([k,v])=>{
+  const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=v;b.setAttribute('aria-pressed',st[kind].cat===k);
+  b.onclick=()=>{st[kind].cat=k;chips(kind,cats);draw(kind);};el.append(b);});}
+
+function match(kind,d){const q=st[kind].q.trim().toLowerCase();if(st[kind].cat&&(d.categoria||d.category)!==st[kind].cat)return false;if(!q)return true;
+  return [d.id,d.nombre,d.name,d.code,d.descripcion,d.textureName].join(' ').toLowerCase().includes(q);}
+
+function copyBtn(text){const b=document.createElement('button');b.type='button';b.textContent='Copiar id';
+  b.onclick=()=>{const done=()=>{b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar id',1400);};
+    try{navigator.clipboard.writeText(text).then(done,()=>{prompt('Id',text);});}catch(_){prompt('Id',text);}};return b;}
+
+function draw(kind){const g=$('g-'+kind),L=st[kind].data.filter(d=>match(kind,d));g.innerHTML='';
+  if(!L.length){g.innerHTML='<p class="empty">Ningún resultado con ese filtro.</p>';return;}
+  L.forEach(d=>{const c=document.createElement('article');c.className='card';
+    if(kind==='elementos'){
+      c.innerHTML=`<div class="vis" aria-hidden="false">${plan(d)}</div><div class="b"><span class="code">${esc(d.id)}</span><span class="n">${esc(d.nombre)}</span>
+        <span class="d">${esc(d.descripcion)}</span><span class="m">${num(d.medidas.ancho)} × ${num(d.medidas.fondo)} m · alto ${num(d.medidas.alto)} m</span>
+        <span class="d">${esc(CAT_EL[d.categoria]||d.categoria)}</span><div class="act"></div></div>`;
+      c.querySelector('.act').append(copyBtn(d.id));
+    }else{
+      c.innerHTML=`<button type="button" class="vis" aria-label="Alternar tablero y detalle de ${esc(d.nombre)}" style="background:${esc(d.fallbackColor)}"><img loading="lazy" alt="" src="${esc(d.images.board.thumb)}"><span class="tag">tablero</span></button>
+        <div class="b"><span class="code">${esc(d.code)} ${esc(d.texture)}</span><span class="n">${esc(d.nombre)}</span>
+        <span class="d">${esc(d.name)} · ${esc(d.textureName)}${d.ral?' · RAL '+esc(d.ral):''}${d.ncs?' · NCS '+esc(d.ncs):''}</span>
+        <span class="d">${esc(CAT_TX[d.category]||d.category)}</span><div class="act"><a href="${esc(d.page)}" target="_blank" rel="noopener">Ficha EGGER ↗</a></div></div>`;
+      c.querySelector('.act').append(copyBtn(d.id));
+      const v=c.querySelector('.vis'),img=v.querySelector('img'),tag=v.querySelector('.tag');let k='board';
+      img.onerror=()=>{img.remove();};
+      v.onclick=()=>{k=k==='board'?'decor':'board';if(img.isConnected)img.src=d.images[k].thumb;tag.textContent=k==='board'?'tablero':'detalle';};
+    }
+    g.append(c);});}
+
+function route(){const k=location.hash==='#texturas'?'texturas':'elementos';
+  ['elementos','texturas'].forEach(t=>{$('p-'+t).hidden=t!==k;$('tab-'+t).setAttribute('aria-selected',t===k);});}
+window.addEventListener('hashchange',route);route();
+
+['elementos','texturas'].forEach(k=>$('q-'+k).addEventListener('input',e=>{st[k].q=e.target.value;draw(k);}));
+
+Promise.all([fetch('elementos.json').then(r=>r.json()),fetch('egger-textures.json').then(r=>r.json())]).then(([el,tx])=>{
+  st.elementos.data=el.elementos;st.texturas.data=tx.decors;
+  $('n-elementos').textContent=el.elementos.length;$('n-texturas').textContent=tx.decors.length;
+  chips('elementos',CAT_EL);chips('texturas',CAT_TX);draw('elementos');draw('texturas');
+}).catch(()=>{['elementos','texturas'].forEach(k=>$('g-'+k).innerHTML='<p class="empty">No se ha podido cargar el catálogo. Recarga la página.</p>');});
+})();
+</script>
+</body>
+</html>

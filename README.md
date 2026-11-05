@@ -24,7 +24,9 @@ El simulador debe generarse o guardarse dentro de `site/` para que se publique.
 | `js/three.min.js` | Librería 3D Three.js (no se toca) |
 | `logo-gpworx.svg` | Logo de la cabecera y de la marca de agua |
 | `send.php` | Envío de la captura a gregor@gpworx.com con el buzón info@ |
+| `library/index.html` | Página de la biblioteca con pestañas **Elementos / Texturas** (botón *Library* del simulador) |
 | `library/elementos.json` | Catálogo de la biblioteca de elementos 3D (ver abajo) |
+| `library/egger-textures.json` | 32 decorativos de tablero melamínico EGGER: código, acabado, color e imágenes públicas de egger.com |
 
 Textos a cambiar para un nuevo cliente/evento: título y descripción en `index.html`
 (cabecera), normativa y pie en `index.html`, y en `js/app.js` las secciones
