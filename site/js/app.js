@@ -309,8 +309,8 @@ function launchZone(p,cx,cz){const X=cx-6,Z=cz-4,a0=-Math.PI/4,a1=3*Math.PI/4;
 
 // ---------- Proposal B · Dintel curvo (según render de referencia) ----------
 const B=new T.Group();scene.add(B);let TG=B;const MG={},MOV=[],TEMPL={},ORIG=[];
-const TYPEOF={rec:'rec',demo:'demo',alm:'alm',bar:'bar',s1:'sala',s2:'sala',t1:'totem',t2:'totem',m1:'mesa',m2:'mesa',m3:'mesa',j1:'jard',j2:'jard'};
-const TYPES={rec:'Mostrador de recepción',demo:'Demo NEXT',alm:'Almacén con pantalla',bar:'Barra curva',sala:'Sala de reunión',totem:'Tótem Challenge Selector',mesa:'Mesa alta',jard:'Jardinera'};
+const TYPEOF={rec:'rec',demo:'demo',alm:'alm',bar:'bar',s1:'sala',s2:'sala',t1:'totem',t2:'totem',m1:'mesa',m2:'mesa',m3:'mesa',j1:'jard',j2:'jard',g1:'cesp',g2:'cesp'};
+const TYPES={rec:'Mostrador de recepción',demo:'Demo NEXT',alm:'Almacén con pantalla',bar:'Barra curva',sala:'Sala de reunión',totem:'Tótem Challenge Selector',mesa:'Mesa alta',jard:'Jardinera',cesp:'Planta de césped'};
 function mov(key,name,fn){const G=new T.Group();B.add(G);TG=G;fn();TG=B;G.updateMatrixWorld(true);
   const bb=new T.Box3().setFromObject(G),c=bb.getCenter(new T.Vector3());
   G.children.forEach(ch=>{ch.position.x-=c.x;ch.position.z-=c.z;});G.position.set(c.x,0,c.z);G.updateMatrixWorld(true);
@@ -365,11 +365,12 @@ function mov(key,name,fn){const G=new T.Group();B.add(G);TG=G;fn();TG=B;G.update
   ring(CX,CZ,1.35,1.7,-Math.PI/4,3*Math.PI/4,0.1,1.04,whiteF);ring(CX,CZ,1.32,1.73,-Math.PI/4,3*Math.PI/4,1.04,1.1,whiteF);});
   mov('t1','Tótem Challenge Selector 1',()=>totem(TG,4.23,0.97,-3*Math.PI/4));mov('t2','Tótem Challenge Selector 2',()=>totem(TG,0.97,4.23,-3*Math.PI/4));
 
-  // recepción curva en la esquina, bajo el dintel, con dos jardineras de gramíneas
+  // recepción curva en la esquina, bajo el dintel; las dos plantas de césped van como elementos aparte (g1, g2)
   const ra0=Math.PI*207/180,ra1=Math.PI*243/180;
   mov('rec','Mostrador de recepción',()=>{ring(CX,CZ,2.3,2.85,ra0,ra1,0.1,1.04,whiteF);{const pts=[];for(let i=0;i<=32;i++){const a=ra0+(ra1-ra0)*i/32;pts.push([CX+2.862*Math.cos(a),CZ+2.862*Math.sin(a)]);}
-    ribbon(pts,0.16,1.0,new T.MeshBasicMaterial({map:tex(1400,660,(g,w,hh)=>{g.fillStyle='#ffffff';g.fillRect(0,0,w,hh);const L=IM.gp;if(!L||!L.naturalWidth)return;const lh=hh*0.8,lw=lh*L.naturalWidth/L.naturalHeight;g.drawImage(L,(w-lw)/2,(hh-lh)/2,lw,lh);}),side:T.DoubleSide}),true);}ring(CX,CZ,2.27,2.88,ra0,ra1,1.04,1.1,whiteF);
-  grassPot(0.35,1.95);grassPot(1.95,0.35);});
+    ribbon(pts,0.16,1.0,new T.MeshBasicMaterial({map:tex(1400,660,(g,w,hh)=>{g.fillStyle='#ffffff';g.fillRect(0,0,w,hh);const L=IM.gp;if(!L||!L.naturalWidth)return;const lh=hh*0.8,lw=lh*L.naturalWidth/L.naturalHeight;g.drawImage(L,(w-lw)/2,(hh-lh)/2,lw,lh);}),side:T.DoubleSide}),true);}ring(CX,CZ,2.27,2.88,ra0,ra1,1.04,1.1,whiteF);});
+  mov('g1','Planta de césped 1',()=>grassPot(0.35,1.95));
+  mov('g2','Planta de césped 2',()=>grassPot(1.95,0.35));
 
   // almacén curvo h 3,5 m en la esquina opuesta (≤ 1/3 de cada lado, RAI 4a) con pantalla
   const SX=11.9,SZ=7.9,SA=3.5,SB=2.6,SH=3.5;
@@ -404,6 +405,28 @@ function mov(key,name,fn){const G=new T.Group();B.add(G);TG=G;fn();TG=B;G.update
   [[5.2,3.6],[6.5,1.8],[5.4,6.9]].forEach((c,i)=>mov('m'+(i+1),'Mesa alta '+(i+1),()=>hightable(TG,c[0],c[1])));
 }
 
+// ---------- biblioteca de elementos ----------
+// Catálogo de los elementos móviles del stand, uno por tipo, para reutilizarlos (modo editor).
+// Las medidas se toman de la plantilla en su posición original, antes de que el usuario la mueva.
+// Consulta desde la consola o desde el editor: GPLIB.list(), GPLIB.get('cesp'), GPLIB.add('cesp',{x:1,z:0.5,r:0}).
+const LIB_CAT={mostrador:'Mostradores y barras',estructura:'Estructuras y salas',senal:'Señalética',mobiliario:'Mobiliario',vegetacion:'Vegetación'};
+const LIB_META={
+  rec:{cat:'mostrador',desc:'Mostrador curvo de recepción con logo GPworx en el frontal, altura 1,00 m'},
+  demo:{cat:'mostrador',desc:'Mostrador curvo con cilindro Ø 1,1 m y maqueta NEXT'},
+  bar:{cat:'mostrador',desc:'Barra curva elíptica, altura 1,00 m, con 4 taburetes'},
+  alm:{cat:'estructura',desc:'Almacén curvo h 3,5 m con pantalla e imágenes'},
+  sala:{cat:'estructura',desc:'Sala de reunión circular de cristal Ø 3 m con mesa y 4 sillas'},
+  totem:{cat:'senal',desc:'Tótem Challenge Selector 55 cm de ancho con gráfica'},
+  mesa:{cat:'mobiliario',desc:'Mesa alta Ø 64 cm con 3 taburetes'},
+  jard:{cat:'vegetacion',desc:'Jardinera de madera con lirios'},
+  cesp:{cat:'vegetacion',desc:'Maceta de madera 40×40 cm con césped ornamental (gramíneas)'},
+};
+const LIB={};
+ORIG.forEach(G=>{const t=G.userData.type;if(LIB[t])return;
+  const bb=new T.Box3().setFromObject(G),s=bb.getSize(new T.Vector3()),r2=v=>Math.round(v*100)/100,meta=LIB_META[t]||{};
+  LIB[t]={id:t,nombre:TYPES[t],categoria:meta.cat||'otros',descripcion:meta.desc||'',plantilla:G.userData.key,
+    medidas:{ancho:r2(s.x),fondo:r2(s.z),alto:r2(bb.max.y-0.1)},origen:'Option A · Dintel a Entrada'};});
+
 
 // ---------- RAI 2 m zone overlay ----------
 const zoneG=new T.Group();scene.add(zoneG);zoneG.visible=false;
@@ -413,7 +436,7 @@ const zoneG=new T.Group();scene.add(zoneG);zoneG.visible=false;
 // ---------- data ----------
 const DATA={
  C:{t:'Dintel a Entrada',s:'Dintel azul en L con esquina redonda, almacén curvo y 2 salas de cristal',g:B,
-  m:[[1,'Dintel azul 80 cm en L, base a 4,0 m, esquina redonda',W(7.2,5.2,0.6)],[2,'Recepción curva en la esquina',W(1.0,1.6,1.0),'rec','rec'],[3,'Zona lanzamiento NEXT · maqueta sobre cilindro',W(3.68,2.4,3.68),'demo','demo'],[4,'6 columnas negras 50×50 cm · 4 en el lado largo y 2 en el corto',W(0.6,2.6,7.6)],[5,'Almacén curvo h 3,5 m con pantalla',W(10.6,3.9,6.8),'alm','alm'],[6,'Barra curva respaldada por el almacén',W(8.7,1.6,5.4),'bar','bar'],[7,'Salas de reunión de cristal',W(2.2,2.9,6.3),'sala','s1'],[8,'Tótems Challenge Selector',W(4.23,2.3,0.97),'totem','t1'],[9,'Mesas altas',W(5.2,1.4,3.6),'mesa','m1'],[10,'Jardineras de lirios',W(4.1,1.2,7.1),'jard','j1']],
+  m:[[1,'Dintel azul 80 cm en L, base a 4,0 m, esquina redonda',W(7.2,5.2,0.6)],[2,'Recepción curva en la esquina',W(1.0,1.6,1.0),'rec','rec'],[3,'Zona lanzamiento NEXT · maqueta sobre cilindro',W(3.68,2.4,3.68),'demo','demo'],[4,'6 columnas negras 50×50 cm · 4 en el lado largo y 2 en el corto',W(0.6,2.6,7.6)],[5,'Almacén curvo h 3,5 m con pantalla',W(10.6,3.9,6.8),'alm','alm'],[6,'Barra curva respaldada por el almacén',W(8.7,1.6,5.4),'bar','bar'],[7,'Salas de reunión de cristal',W(2.2,2.9,6.3),'sala','s1'],[8,'Tótems Challenge Selector',W(4.23,2.3,0.97),'totem','t1'],[9,'Mesas altas',W(5.2,1.4,3.6),'mesa','m1'],[10,'Jardineras de lirios',W(4.1,1.2,7.1),'jard','j1'],[11,'Plantas de césped junto a la recepción',W(0.35,1.15,1.95),'cesp','g1']],
   d:'Un dintel azul de 80 cm en L, con la esquina redondeada sobre la recepción, recorre el pasillo del muro y el lateral izquierdo apoyado en 6 columnas negras con imágenes. Detrás, la zona de lanzamiento NEXT (mostrador curvo con la maqueta sobre un cilindro azul incrustado) y dos tótems en sus extremos marcan la entrada. Al fondo, el almacén curvo con pantalla respalda una barra curva y queda flanqueado por dos salas de reunión circulares de cristal.',
   n:[['Dintel 80 cm a 4,0 m','Elemento ≤ 100 cm con base ≥ 4,0 m: anchura libre (7a); altura total 4,8 m.'],['6 columnas 50×50 cm','4 en el lado largo (frente) y 2 en el corto (lateral), separadas ≥ 2 m libres, h 4,0 m (4b).'],['Almacén h 3,5 m','Ocupa 3,5 m del lado de 12 m (≤ 4 m) y 2,6 m del de 8 m (≤ 2,67 m) (4a).'],['Lados abiertos','Salas en cristal (cuentan como abierto); recepción, barra y mostradores < 1,30 m; cilindro azul 1,4 m integrado en el mostrador.']],
   f:[['DINTEL CURVO','Esquina redonda sobre la recepción'],['ZONA LANZAMIENTO NEXT','Maqueta sobre cilindro azul'],['BARRA CURVA','Respaldada por el almacén con pantalla'],['2 SALAS DE CRISTAL','Reuniones privadas y visibles']]}
@@ -438,9 +461,17 @@ function save(){if(VIEW_ONLY)return;try{localStorage.setItem(LS2,JSON.stringify(
 function cloneOf(srcG,key){const G=srcG.clone(true);G.userData={key,src:srcG.userData.src,type:srcG.userData.type,name:'',home:{x:srcG.position.x,z:srcG.position.z,r:0}};return G;}
 function place(G,x,z,r){G.position.x=x;G.position.z=z;G.rotation.y=r||0;if(!B.children.includes(G))B.add(G);if(!MOV.includes(G))MOV.push(G);}
 function unplace(G){B.remove(G);const i=MOV.indexOf(G);if(i>=0)MOV.splice(i,1);}
+// coloca g1/g2 respecto a cada mostrador de recepción, con el mismo desfase y giro que en el diseño original
+function placeGrassWithReception(){const R0=TEMPL.rec.userData.home;
+  MOV.filter(G=>G.userData.type==='rec').forEach((R,n)=>{const th=R.rotation.y,c=Math.cos(th),s=Math.sin(th);
+    ['g1','g2'].forEach(k=>{const T0=TEMPL[k],h=T0.userData.home,dx=h.x-R0.x,dz=h.z-R0.z;
+      const G=n===0&&!MOV.includes(T0)?T0:cloneOf(T0,'n'+Date.now().toString(36)+(uid++));
+      place(G,R.position.x+dx*c+dz*s,R.position.z-dx*s+dz*c,th);});});}
 function renameAll(){Object.keys(TYPES).forEach(t=>{const L=MOV.filter(G=>G.userData.type===t);L.forEach((G,i)=>G.userData.name=TYPES[t]+(L.length>1?' '+(i+1):''));});}
 function load(){try{const a=JSON.parse(localStorage.getItem(LS2)||'null');
-    if(Array.isArray(a)){ORIG.forEach(unplace);a.forEach(e=>{const T0=TEMPL[e.s];if(!T0)return;let G=TEMPL[e.k];if(!G||MOV.includes(G)){G=cloneOf(T0,e.k||('n'+(uid++)));}place(G,e.x,e.z,e.r);});}
+    if(Array.isArray(a)){ORIG.forEach(unplace);a.forEach(e=>{const T0=TEMPL[e.s];if(!T0)return;let G=TEMPL[e.k];if(!G||MOV.includes(G)){G=cloneOf(T0,e.k||('n'+(uid++)));}place(G,e.x,e.z,e.r);});
+      // montajes guardados antes de separar las plantas de césped del mostrador: colocarlas junto a cada recepción
+      if(!a.some(e=>e.s==='g1'||e.s==='g2'))placeGrassWithReception();}
     else{const o=JSON.parse(localStorage.getItem(LS)||'null');if(o)MOV.forEach(G=>{const v=o[G.userData.key];if(v){G.position.x=v[0];G.position.z=v[1];G.rotation.y=v[2];}});}
   }catch(_){}renameAll();}
 function addOf(type,from){const L=MOV.filter(G=>G.userData.type===type);const src=from||L[L.length-1];
@@ -541,6 +572,20 @@ document.querySelectorAll('.views button[data-v]').forEach(b=>b.onclick=()=>{aut
 document.getElementById('rot').onclick=()=>{auto=!auto;anim=null;};
 document.getElementById('zone').onclick=e=>{zoneG.visible=!zoneG.visible;e.currentTarget.classList.toggle('on',zoneG.visible);};
 show('C');
+
+// API pública de la biblioteca (para el futuro modo editor)
+window.GPLIB={
+  categorias:LIB_CAT,
+  list:cat=>Object.values(LIB).filter(e=>!cat||e.categoria===cat).map(e=>({...e,enEscena:MOV.filter(G=>G.userData.type===e.id).length})),
+  get:id=>LIB[id]?{...LIB[id],enEscena:MOV.filter(G=>G.userData.type===id).length}:null,
+  // incorpora un elemento: sin posición, se coloca junto al último del mismo tipo o en su sitio original (metros, origen en el centro del stand)
+  add(id,pos){if(VIEW_ONLY||!LIB[id])return null;const src=TEMPL[LIB[id].plantilla];
+    if(!pos){addOf(id);return sel?sel.userData.key:null;}
+    const G=cloneOf(src,'n'+Date.now().toString(36)+(uid++));place(G,pos.x||0,pos.z||0,pos.r||0);clampPos(G);
+    G.userData.home={x:G.position.x,z:G.position.z,r:0};renameAll();save();refresh();select(G);return G.userData.key;},
+  remove(id){if(!VIEW_ONLY&&LIB[id])removeOf(id);},
+  toJSON:()=>JSON.stringify({version:1,elementos:Object.values(LIB)},null,2),
+};
 
 
 // ---------- captura + envío directo ----------

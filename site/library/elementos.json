@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "elementos": [
+    {
+      "id": "demo",
+      "nombre": "Demo NEXT",
+      "categoria": "mostrador",
+      "descripcion": "Mostrador curvo con cilindro Ø 1,1 m y maqueta NEXT",
+      "plantilla": "demo",
+      "medidas": {
+        "ancho": 2.95,
+        "fondo": 2.95,
+        "alto": 1.9
+      },
+      "origen": "Option A · Dintel a Entrada"
+    },
+    {
+      "id": "totem",
+      "nombre": "Tótem Challenge Selector",
+      "categoria": "senal",
+      "descripcion": "Tótem Challenge Selector 55 cm de ancho con gráfica",
+      "plantilla": "t1",
+      "medidas": {
+        "ancho": 0.47,
+        "fondo": 0.47,
+        "alto": 1.76
+      },
+      "origen": "Option A · Dintel a Entrada"
+    },
+    {
+      "id": "rec",
+      "nombre": "Mostrador de recepción",
+      "categoria": "mostrador",
+      "descripcion": "Mostrador curvo de recepción con logo GPworx en el frontal, altura 1,00 m",
+      "plantilla": "rec",
+      "medidas": {
+        "ancho": 1.54,
+        "fondo": 1.54,
+        "alto": 1
+      },
+      "origen": "Option A · Dintel a Entrada"
+    },
+    {
+      "id": "cesp",
+      "nombre": "Planta de césped",
+      "categoria": "vegetacion",
+      "descripcion": "Maceta de madera 40×40 cm con césped ornamental (gramíneas)",
+      "plantilla": "g1",
+      "medidas": {
+        "ancho": 0.48,
+        "fondo": 0.43,
+        "alto": 1.38
+      },
+      "origen": "Option A · Dintel a Entrada"
+    },
+    {
+      "id": "alm",
+      "nombre": "Almacén con pantalla",
+      "categoria": "estructura",
+      "descripcion": "Almacén curvo h 3,5 m con pantalla e imágenes",
+      "plantilla": "alm",
+      "medidas": {
+        "ancho": 3.52,
+        "fondo": 2.62,
+        "alto": 3.5
+      },
+      "origen": "Option A · Dintel a Entrada"
+    },
+    {
+      "id": "bar",
+      "nombre": "Barra curva",
+      "categoria": "mostrador",
+      "descripcion": "Barra curva elíptica, altura 1,00 m, con 4 taburetes",
+      "plantilla": "bar",
+      "medidas": {
+        "ancho": 2.91,
+        "fondo": 2.69,
+        "alto": 1
+      },
+      "origen": "Option A · Dintel a Entrada"
+    },
+    {
+      "id": "sala",
+      "nombre": "Sala de reunión",
+      "categoria": "estructura",
+      "descripcion": "Sala de reunión circular de cristal Ø 3 m con mesa y 4 sillas",
+      "plantilla": "s1",
+      "medidas": {
+        "ancho": 2.99,
+        "fondo": 3.12,
+        "alto": 2.52
+      },
+      "origen": "Option A · Dintel a Entrada"
+    },
+    {
+      "id": "jard",
+      "nombre": "Jardinera",
+      "categoria": "vegetacion",
+      "descripcion": "Jardinera de madera con lirios",
+      "plantilla": "j1",
+      "medidas": {
+        "ancho": 0.4,
+        "fondo": 1,
+        "alto": 0.84
+      },
+      "origen": "Option A · Dintel a Entrada"
+    },
+    {
+      "id": "mesa",
+      "nombre": "Mesa alta",
+      "categoria": "mobiliario",
+      "descripcion": "Mesa alta Ø 64 cm con 3 taburetes",
+      "plantilla": "m1",
+      "medidas": {
+        "ancho": 1.45,
+        "fondo": 1.31,
+        "alto": 0.96
+      },
+      "origen": "Option A · Dintel a Entrada"
+    }
+  ]
+}
