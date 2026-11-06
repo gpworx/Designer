@@ -100,14 +100,14 @@ function sofa(p,x,z,face){const g=new T.Group();const B=(w,h,d,px,py,pz,m)=>{con
 function lowTable(p,x,z){cyl(p,x,z,0.25,FL+0.48,FL+0.51,M.white,32);[0,1,2].forEach(k=>{const a=k*2.1;cyl(p,x+0.14*Math.cos(a),z+0.14*Math.sin(a),0.014,FL,FL+0.48,M.legs,6);});
   box(p,x-0.09,z-0.06,x+0.09,z+0.06,FL+0.51,FL+0.52,M.black);}
 function stool(p,x,z){cyl(p,x,z,0.21,FL+0.74,FL+0.79,M.white,24);[[.13,.13],[-.13,.13],[.13,-.13],[-.13,-.13]].forEach(q=>cyl(p,x+q[0],z+q[1],0.015,FL,FL+0.74,M.legs,6));cyl(p,x,z,0.17,FL+0.3,FL+0.32,M.legs,20);}
-function highTable(p,x,z){cyl(p,x,z,0.32,FL+1.02,FL+1.05,M.white,32);cyl(p,x,z,0.035,FL,FL+1.02,M.white,10);cyl(p,x,z,0.24,FL,FL+0.03,M.white,24);
-  for(let k=0;k<3;k++){const a=k*2*Math.PI/3+0.5,sx=x+0.6*Math.cos(a),sz=z+0.6*Math.sin(a);cyl(p,sx,sz,0.19,FL+0.74,FL+0.78,M.white,20);
+function highTable(p,x,z,a0){a0=a0==null?0.5:a0;cyl(p,x,z,0.32,FL+1.02,FL+1.05,M.white,32);cyl(p,x,z,0.035,FL,FL+1.02,M.white,10);cyl(p,x,z,0.24,FL,FL+0.03,M.white,24);
+  for(let k=0;k<3;k++){const a=k*2*Math.PI/3+a0,sx=x+0.6*Math.cos(a),sz=z+0.6*Math.sin(a);cyl(p,sx,sz,0.19,FL+0.74,FL+0.78,M.white,20);
     [[.12,.12],[-.12,.12],[.12,-.12],[-.12,-.12]].forEach(q=>cyl(p,sx+q[0],sz+q[1],0.014,FL,FL+0.74,M.legs,6));}}
 
 // ---------- stand ----------
 // Numeración y medidas según los planos de presentación (FLOOR PLAN · ELEVATIONS · ELEMENTS, cm)
 const B=new T.Group();scene.add(B);let TG=B;const MOV=[],TEMPL={},ORIG=[];
-const TYPES={pill:'Mostrador demo trasero',vit:'Mostrador demo lateral',fc:'Mostrador demo frontal',disp:'Expositor LED',ring:'Banner circular',trol:'Máquina cliente',tot:'Tótem demo retroiluminado',kio:'Mostrador de máquina',rec:'Barra en L',cab:'Almacén',lng:'Zona lounge',lily:'Jardinera larga',grass:'Jardinera cuadrada',ch:'Silla'};
+const TYPES={pill:'Mostrador demo trasero',vit:'Mostrador demo lateral',fc:'Mostrador demo frontal',disp:'Expositor LED',ring:'Banner circular',trol:'Máquina cliente',tot:'Tótem demo retroiluminado',kio:'Mostrador de máquina',rec:'Barra en L',cab:'Almacén',lng:'Zona lounge',lily:'Jardinera larga',grass:'Jardinera cuadrada',ch:'Silla',ht:'Mesa alta con 3 sillas'};
 function mov(key,type,fn){const G=new T.Group();B.add(G);TG=G;fn(G);TG=B;G.updateMatrixWorld(true);
   const bb=new T.Box3().setFromObject(G),c=bb.getCenter(new T.Vector3());
   G.children.forEach(ch=>{ch.position.x-=c.x;ch.position.z-=c.z;});G.position.set(c.x,0,c.z);
@@ -170,8 +170,8 @@ mov('l2','lng',g=>{sofa(g,8.6,4.82,0);lowTable(g,8.63,5.58);armchair(g,8.01,6.05
 // 11 · jardineras: 30 × 150 (×2) en el borde derecho · 30 × 30 (×4) alrededor de los lounges (biblioteca GPworx)
 mov('j1','lily',()=>lilyBox(TG,9.7,0.25,10.0,1.75));mov('j2','lily',()=>lilyBox(TG,9.7,4.75,10.0,6.25));
 [[7.3,0.2],[7.62,1.65],[7.62,4.79],[7.3,6.18]].forEach((q,i)=>mov('g'+(i+1),'grass',()=>grassPot(TG,q[0],q[1])));
-// 13 · sillas (2)
-[[3.12,3.21],[3.82,3.21]].forEach((q,i)=>mov('c'+(i+1),'ch',()=>stool(TG,q[0],q[1]))); // centradas bajo el banner
+// 13 · mesas altas (2) con 3 sillas cada una
+[[3.47,2.43,0.5],[3.47,3.99,0.5+Math.PI]].forEach((q,i)=>mov('h'+(i+1),'ht',()=>highTable(TG,q[0],q[1],q[2]))); // 2 mesas altas con 3 taburetes, en el centro bajo el banner
 
 // ---------- hall ----------
 const common=new T.Group();scene.add(common);
@@ -276,7 +276,7 @@ let drag=null,itemDrag=null,sel=null,downAt=null,selBox=null,pinch=null;
 const ray=new T.Raycaster(),ndc=new T.Vector2(),ground=new T.Plane(new T.Vector3(0,1,0),-FL),hitP=new T.Vector3();
 function setNdc(e){const r=canvas.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1);ray.setFromCamera(ndc,camera);}
 function pick(e){setNdc(e);const h=ray.intersectObjects(B.children,true);for(const x of h){if(!x.object.visible||x.object===floorM)continue;let o=x.object;while(o&&o.parent!==B)o=o.parent;if(o&&MOV.includes(o))return o;}return null;}
-const LS='coloplast-eau27-v2';let uid=0;
+const LS='coloplast-eau27-v3';let uid=0;
 function save(){if(VIEW_ONLY)return;try{localStorage.setItem(LS,JSON.stringify(MOV.map(G=>({k:G.userData.key,s:G.userData.src,x:+G.position.x.toFixed(3),z:+G.position.z.toFixed(3),r:+G.rotation.y.toFixed(4)}))));}catch(_){}}
 function cloneOf(src,key){const G=src.clone(true);G.userData={key,src:src.userData.src,type:src.userData.type,name:'',home:{x:src.position.x,z:src.position.z,r:0}};return G;}
 function place(G,x,z,r){G.position.x=x;G.position.z=z;G.rotation.y=r||0;if(!B.children.includes(G))B.add(G);if(!MOV.includes(G))MOV.push(G);}
@@ -359,7 +359,7 @@ const LEG=[
  ['lily','11','Jardinera larga','30 × 150 (×2)',W(9.85,1.25,1.0),'j1'],
  ['grass','11','Jardinera cuadrada','30 × 30 (×4)',W(7.3,1.5,0.2),'g1'],
  [null,'12','Pared gráfica verde con logo','h 297 · frente del almacén (125) · baldas blancas 245 × 50 × 100',W(7.5,2.4,3.9)],
- ['ch','13','Silla','centradas bajo el banner',W(3.12,1.1,3.21),'c1'],
+ ['ht','13','Mesa alta con 3 sillas','×2 · centro del stand, bajo el banner',W(3.47,1.45,2.43),'h1'],
  [null,'14','Acceso','100 · borde frontal',W(5.5,FL+0.05,6.25)]];
 LEG.forEach(m=>{if(!m[0])return;const G=TEMPL[m[5]];G.updateMatrixWorld(true);m[6]=G.worldToLocal(m[4].clone());});
 const mkWrap=document.getElementById('markers');let MKS=[];
