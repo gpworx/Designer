@@ -135,3 +135,17 @@ body.shield .stage canvas,body.shield #markers,body.shield #mlabels,body.shield 
 /* ---------- modo solo lectura (design/) ---------- */
 .view-only #resetAll,.view-only #sel,.view-only aside .lh{display:none!important}
 .view-only .views button[data-v="hall"]{margin-right:10px}
+
+/* ---------- botón cerrar (✕) arriba a la derecha en ventanas emergentes ---------- */
+.shotbox{position:relative}
+.sel{padding-right:48px}
+.shotbox{padding-top:44px}
+.xclose{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;border:1px solid #55575e;background:#1a1b1e;color:#fff;font:bold 14px/1 Helvetica,Arial,sans-serif;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:2}
+.xclose:hover{border-color:#ffb020;color:#ffb020}
+/* ---------- espera de 3 min tras enviar una captura ---------- */
+.shot{position:relative;overflow:hidden}
+.shot.cooling{background:#3a3d45!important;color:#d6d8de;cursor:wait;box-shadow:none;filter:none}
+.shot.cooling::after{content:"";position:absolute;left:0;bottom:0;height:4px;width:var(--p,0%);background:#ffb020;transition:width 1s linear}
+.shot .spin{width:18px;height:18px;flex:0 0 auto;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:gpspin .8s linear infinite}
+.shot .lbl{font-size:14px}
+@keyframes gpspin{to{transform:rotate(360deg)}}

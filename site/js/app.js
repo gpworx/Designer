@@ -564,16 +564,18 @@ function layoutText(){return MOV.map(G=>{const d=Math.round(((-G.rotation.y*180/
 const fname=()=>'stand-event-option-A-'+new Date().toISOString().slice(0,16).replace(/[:T]/g,'-')+'.png';
 const subj='Stand - Event 2027 · Option A · configuración';
 const bodyTxt=()=>'Captura de la configuración del stand (Option A).\n\nPosiciones (X sobre el lado de 12 m, Y sobre el de 8 m, desde la esquina de la recepción):\n'+layoutText()+'\n';
-shotBtn.onclick=async()=>{if(sending)return;sending=true;shotBtn.disabled=true;
+const CD=window.GPCooldown;if(CD)CD.bind(shotBtn);
+shotBtn.onclick=async()=>{if(sending||(CD&&CD.active()))return;sending=true;shotBtn.disabled=true;if(CD)CD.busy(true);
   try{shotBlob=await capture();if(shotURL)URL.revokeObjectURL(shotURL);shotURL=URL.createObjectURL(shotBlob);shotImg.src=shotURL;shotBox.hidden=false;
     shotMsg.textContent='Enviando captura a '+SEND_TO+'…';
     const fd=new FormData();fd.append('subject',subj);fd.append('body',bodyTxt());fd.append('image',shotBlob,fname());
     const r=await fetch(SEND_ENDPOINT,{method:'POST',body:fd});const j=await r.json().catch(()=>({}));
+    if(r.status===429&&j.wait&&CD)CD.start(j.wait*1000);
     if(!r.ok||!j.ok)throw new Error(j.error||('HTTP '+r.status));
-    shotMsg.innerHTML='✓ Captura enviada a <b></b>.';shotMsg.querySelector('b').textContent=SEND_TO;
+    shotMsg.innerHTML='✓ Captura enviada a <b></b>.';shotMsg.querySelector('b').textContent=SEND_TO;if(CD)CD.start();
   }catch(e){
     shotMsg.textContent='No se pudo enviar la captura ('+String(e.message||e)+'). Inténtalo de nuevo en un momento.';
-  }finally{sending=false;shotBtn.disabled=false;}};
+  }finally{sending=false;if(CD)CD.busy(false);else shotBtn.disabled=false;}};
 document.getElementById('shotCancel').onclick=()=>{shotBox.hidden=true;shotMsg.textContent='';};
 // ---------- protección ----------
 (function(){

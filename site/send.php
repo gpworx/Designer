@@ -9,6 +9,17 @@ $MAX  = 10 * 1024 * 1024; // 10 MB
 function fail($code, $msg) { http_response_code($code); echo json_encode(['ok' => false, 'error' => $msg]); exit; }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') fail(405, 'Método no permitido');
+
+// Límite: 1 captura cada 3 minutos por IP (el navegador también lo aplica)
+$WAIT = 180;
+$ip   = $_SERVER['REMOTE_ADDR'] ?? 'x';
+$lock = sys_get_temp_dir() . '/gpworx_send_' . md5($ip);
+if (is_file($lock) && (time() - filemtime($lock)) < $WAIT) {
+    $left = $WAIT - (time() - filemtime($lock));
+    http_response_code(429);
+    echo json_encode(['ok' => false, 'error' => 'Espera ' . ceil($left / 60) . ' min antes de enviar otra captura', 'wait' => $left]);
+    exit;
+}
 if (empty($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) fail(400, 'Falta la imagen');
 if ($_FILES['image']['size'] > $MAX) fail(413, 'Imagen demasiado grande');
 
@@ -58,6 +69,7 @@ if (is_array($cfg) && !empty($cfg['pass'])) {
 } else {
     if (!mail($TO, $encSubject, $msg, $headers, "-f$FROM")) fail(500, 'El servidor no pudo enviar el correo');
 }
+@touch($lock);
 echo json_encode(['ok' => true, 'via' => (is_array($cfg) && !empty($cfg['pass'])) ? 'smtp' : 'mail']);
 
 function smtp_send($cfg, $from, $to, $subject, $headers, $body) {

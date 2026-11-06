@@ -1,7 +1,7 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Coloplast EAU 2027 · Stand E01</title>
 <meta name="theme-color" content="#222222">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=20261106">
 </head><body>
 <div class="printblock">Esta propuesta es confidencial y no se puede imprimir. Escribe a gregor@gpworx.com para recibir la configuración.</div>
 <header>
@@ -15,9 +15,9 @@
     <div class="wm" aria-hidden="true"><i id="wmTile"></i></div>
     <div class="mhint" id="mhint" hidden>Toca dos puntos para medir · arrastra para girar · Esc para salir</div>
     <div class="title-ov"><div class="tl"><h2>Coloplast</h2><span class="sep">·</span><span class="s">Isla, 4 lados abiertos a pasillo</span></div></div>
-    <div class="sel" id="sel" hidden>
+    <div class="sel" id="sel" hidden><button class="xclose" id="selX" type="button" aria-label="Cerrar" title="Cerrar">✕</button>
       <div class="selh"><b id="selN"></b><span id="selP"></span></div>
-      <div class="selb"><button data-r="-15">⟲ 15°</button><button data-r="15">⟳ 15°</button><button data-r="90">⟳ 90°</button><button id="selDup">＋ Duplicar</button><button id="selDel">− Eliminar</button><button id="selHome">Original</button><button id="selX" aria-label="Cerrar">✕</button></div>
+      <div class="selb"><button data-r="-15">⟲ 15°</button><button data-r="15">⟳ 15°</button><button data-r="90">⟳ 90°</button><button id="selDup">＋ Duplicar</button><button id="selDel">− Eliminar</button><button id="selHome">Original</button></div>
       <div class="dims" id="dims" hidden></div>
     </div>
   </div>
@@ -41,7 +41,7 @@
   </div>
   <aside>
     <button class="shot" id="shotBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l2-2.5h6L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Enviar captura a GPworx</button>
-    <div class="shotbox" id="shotBox" hidden><img id="shotImg" alt="Captura de la configuración actual"><p class="shotmsg" id="shotMsg" role="status"></p><div class="shotact"><button id="shotCancel" type="button">Cerrar</button></div></div>
+    <div class="shotbox" id="shotBox" hidden><button class="xclose" id="shotCancel" type="button" aria-label="Cerrar" title="Cerrar">✕</button><img id="shotImg" alt="Captura de la configuración actual"><p class="shotmsg" id="shotMsg" role="status"></p></div>
     <h3>NORMATIVA EN VIVO</h3>
     <p class="status" id="status" role="status"></p>
     <div class="leg2"><span><i style="background:#e0483e"></i>Cierra el lado (≤ 1 m del borde)</span><span><i style="background:#d98c3a"></i>Tapa la vista (más adentro)</span><span><i style="background:#fff"></i>Mínimo exigido</span></div>
@@ -63,9 +63,10 @@
 </section>
 <p class="note">Volumetría a escala tomada de la planta y los alzados (cuadrícula 10 cm) y de los renders de PROEXPO; no es un render fotorrealista. Los porcentajes son una comprobación de diseño y la validación final corresponde a la organización del EAU.</p>
 <div class="credit"><span style="color:#b4b6bc;font-size:17px;letter-spacing:.3px">Simulador de stand de GPWORX · Coloplast · EAU 2027</span></div>
-<script src="../js/three.min.js"></script>
-<script src="images.js"></script>
+<script src="../js/three.min.js?v=20261106"></script>
+<script src="images.js?v=20261106"></script>
+<script src="../js/gp-cooldown.js?v=20261106"></script>
 <script>window.GP_VIEW_ONLY=true</script>
-<script src="app.js"></script>
+<script src="app.js?v=20261106"></script>
 
 </body></html>

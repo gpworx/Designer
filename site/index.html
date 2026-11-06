@@ -4,7 +4,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon-16x16.png">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css?v=20261106">
 </head><body>
 <!-- ===================== AVISO AL IMPRIMIR ===================== -->
 <div class="printblock">Esta propuesta es confidencial y no se puede imprimir. Para recibir la configuración, usa el botón «Enviar captura a GPworx» o escribe a gregor@gpworx.com.</div>
@@ -23,9 +23,9 @@
     <div class="mhint" id="mhint" hidden>Toca dos puntos para medir · arrastra para girar · Esc para salir</div>
     <div class="title-ov"><span class="k" id="tk">OPTION A</span><div class="tl"><h2 id="tt"></h2><span class="sep">·</span><span class="s" id="ts"></span></div></div>
     <div class="hint">Toca un elemento y arrástralo · arrastra el fondo para girar · rueda / pellizco para zoom</div>
-    <div class="sel" id="sel" hidden>
+    <div class="sel" id="sel" hidden><button class="xclose" id="selX" type="button" aria-label="Cerrar" title="Cerrar">✕</button>
       <div class="selh"><b id="selN"></b><span id="selP"></span></div>
-      <div class="selb"><button data-r="-15">⟲ 15°</button><button data-r="15">⟳ 15°</button><button data-r="90">⟳ 90°</button><button id="selDup">＋ Duplicar</button><button id="selDel">− Eliminar</button><button id="selHome">Original</button><button id="selX" aria-label="Cerrar">✕</button></div>
+      <div class="selb"><button data-r="-15">⟲ 15°</button><button data-r="15">⟳ 15°</button><button data-r="90">⟳ 90°</button><button id="selDup">＋ Duplicar</button><button id="selDel">− Eliminar</button><button id="selHome">Original</button></div>
     </div>
   </div>
     <!-- ---------- BOTONES: vistas (Main…Pavillon) + herramientas (Measure…Reset) ---------- -->
@@ -45,10 +45,9 @@
   </div>
   <!-- ---------- PANEL LATERAL: botón de captura + elementos clave ---------- -->
   <aside><button class="shot" id="shotBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l2-2.5h6L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Enviar captura a GPworx</button>
-  <div class="shotbox" id="shotBox" hidden>
+  <div class="shotbox" id="shotBox" hidden><button class="xclose" id="shotCancel" type="button" aria-label="Cerrar" title="Cerrar">✕</button>
     <img id="shotImg" alt="Captura de la configuración actual">
     <p class="shotmsg" id="shotMsg" role="status"></p>
-    <div class="shotact"><button id="shotCancel" type="button">Cerrar</button></div>
   </div>
   <h3>ELEMENTOS CLAVE</h3><p class="lh">Los marcados con ✥ se pueden mover: tócalos aquí o en el 3D. Usa − y + para quitar o añadir unidades.</p><ol id="legend"></ol><div class="desc" id="desc"></div></aside>
 </div>
@@ -61,9 +60,10 @@
 <div class="credit"><span style="color:#b4b6bc;font-size:17px;letter-spacing:.3px">Propuesta de diseño de stand de GPWORX · Stand - Event 2027</span></div>
 
 <!-- ===================== SCRIPTS ===================== -->
-<script src="js/three.min.js"></script>
-<script src="js/images.js"></script>
-<script src="js/app.js"></script>
+<script src="js/three.min.js?v=20261106"></script>
+<script src="js/images.js?v=20261106"></script>
+<script src="js/gp-cooldown.js?v=20261106"></script>
+<script src="js/app.js?v=20261106"></script>
 
 
 </body></html>
