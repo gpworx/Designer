@@ -179,3 +179,12 @@ aside li.st .pm{padding-left:27px;padding-right:27px}
 aside li.mv .nm::after{content:none}
 aside li.mv .nm{position:relative}
 .title-ov .tl{margin-top:0}
+.dims{flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding-top:8px;border-top:1px solid #45474d}
+.dims label{font-size:12px;color:#d6d8de;font-weight:bold}
+.dc{display:inline-flex;align-items:center;gap:4px;margin-right:6px}
+.dc button{width:26px;height:26px;border-radius:50%;border:1px solid #5d6270;background:#1b1c1f;color:#fff;font:bold 15px/1 Helvetica,Arial,sans-serif;cursor:pointer;padding:0}
+.dc button:hover{border-color:#ffb020}.dc button:focus-visible,.dims input:focus-visible,.dims .dr:focus-visible{outline:2px solid #ffb020;outline-offset:1px}
+.dims input{width:62px;background:#1b1c1f;color:#fff;border:1px solid #5d6270;border-radius:6px;padding:4px 6px;font:13px Helvetica,Arial,sans-serif;font-variant-numeric:tabular-nums;text-align:right}
+.dc i{font-style:normal;font-size:11px;color:var(--mut)}
+.dims .dr{background:var(--navy2);color:var(--txt);border:1px solid #45474d;border-radius:999px;padding:5px 10px;cursor:pointer;font-weight:bold;font-size:11.5px}
+.view-only .dims{display:none!important}

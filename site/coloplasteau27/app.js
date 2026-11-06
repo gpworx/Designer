@@ -277,21 +277,37 @@ const ray=new T.Raycaster(),ndc=new T.Vector2(),ground=new T.Plane(new T.Vector3
 function setNdc(e){const r=canvas.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1);ray.setFromCamera(ndc,camera);}
 function pick(e){setNdc(e);const h=ray.intersectObjects(B.children,true);for(const x of h){if(!x.object.visible||x.object===floorM)continue;let o=x.object;while(o&&o.parent!==B)o=o.parent;if(o&&MOV.includes(o))return o;}return null;}
 const LS='coloplast-eau27-v3';let uid=0;
-function save(){if(VIEW_ONLY)return;try{localStorage.setItem(LS,JSON.stringify(MOV.map(G=>({k:G.userData.key,s:G.userData.src,x:+G.position.x.toFixed(3),z:+G.position.z.toFixed(3),r:+G.rotation.y.toFixed(4)}))));}catch(_){}}
+function save(){if(VIEW_ONLY)return;try{localStorage.setItem(LS,JSON.stringify(MOV.map(G=>({k:G.userData.key,s:G.userData.src,x:+G.position.x.toFixed(3),z:+G.position.z.toFixed(3),r:+G.rotation.y.toFixed(4),y:+G.position.y.toFixed(3),sx:+G.scale.x.toFixed(4),sy:+G.scale.y.toFixed(4),sz:+G.scale.z.toFixed(4)}))));}catch(_){}}
 function cloneOf(src,key){const G=src.clone(true);G.userData={key,src:src.userData.src,type:src.userData.type,name:'',home:{x:src.position.x,z:src.position.z,r:0}};return G;}
 function place(G,x,z,r){G.position.x=x;G.position.z=z;G.rotation.y=r||0;if(!B.children.includes(G))B.add(G);if(!MOV.includes(G))MOV.push(G);}
 function unplace(G){B.remove(G);const i=MOV.indexOf(G);if(i>=0)MOV.splice(i,1);}
 function renameAll(){Object.keys(TYPES).forEach(t=>{const L=MOV.filter(G=>G.userData.type===t);L.forEach((G,i)=>G.userData.name=TYPES[t]+(L.length>1?' '+(i+1):''));});}
-function load(){try{const a=JSON.parse(localStorage.getItem(LS)||'null');if(Array.isArray(a)){ORIG.forEach(unplace);a.forEach(e=>{const T0=TEMPL[e.s];if(!T0)return;let G=TEMPL[e.k];if(!G||MOV.includes(G))G=cloneOf(T0,e.k||('n'+(uid++)));place(G,e.x,e.z,e.r);});}}catch(_){}renameAll();}
+function load(){try{const a=JSON.parse(localStorage.getItem(LS)||'null');if(Array.isArray(a)){ORIG.forEach(unplace);a.forEach(e=>{const T0=TEMPL[e.s];if(!T0)return;let G=TEMPL[e.k];if(!G||MOV.includes(G))G=cloneOf(T0,e.k||('n'+(uid++)));place(G,e.x,e.z,e.r);G.position.y=e.y||0;G.scale.set(e.sx||1,e.sy||1,e.sz||1);});}}catch(_){}renameAll();}
 function clampPos(G){G.position.x=Math.min(SX/2,Math.max(-SX/2,Math.round(G.position.x/0.05)*0.05));G.position.z=Math.min(SZ/2,Math.max(-SZ/2,Math.round(G.position.z/0.05)*0.05));}
 function addOf(type,from){const L=MOV.filter(G=>G.userData.type===type);const src=from||L[L.length-1]||ORIG.find(G=>G.userData.type===type);const G=cloneOf(src,'n'+Date.now().toString(36)+(uid++));
   place(G,src.position.x+0.6,src.position.z+0.6,src.rotation.y);clampPos(G);G.userData.home={x:G.position.x,z:G.position.z,r:0};renameAll();changed();select(G);}
 function removeOf(type,G){if(!G){const L=MOV.filter(o=>o.userData.type===type);G=(sel&&sel.userData.type===type)?sel:L[L.length-1];}if(!G)return;if(sel===G)select(null);unplace(G);renameAll();changed();}
 const fmt=n=>n.toFixed(2).replace('.',',');
 function selInfo(){if(!sel)return;const d=Math.round(((-sel.rotation.y*180/Math.PI)%360+360)%360);document.getElementById('selP').textContent=`X ${fmt(sel.position.x+SX/2)} m · Y ${fmt(sel.position.z+SZ/2)} m · giro ${d}°`;}
+
 function select(G){sel=G;if(selBox){scene.remove(selBox);selBox=null;}const p=document.getElementById('sel');stage.classList.toggle('editing',!!G);p.hidden=!G;
   document.querySelectorAll('#legend li').forEach(li=>li.classList.toggle('on',!!(G&&li.dataset.t===G.userData.type)));
-  if(!G)return;selBox=new T.BoxHelper(G,0xffb020);selBox.material.depthTest=false;selBox.renderOrder=9;scene.add(selBox);document.getElementById('selN').textContent=G.userData.name;selInfo();}
+  if(!G){renderDims();return;}selBox=new T.BoxHelper(G,0xffb020);selBox.material.depthTest=false;selBox.renderOrder=9;scene.add(selBox);document.getElementById('selN').textContent=G.userData.name;selInfo();renderDims();}
+
+// ---------- medidas editables (solo edit.html) ----------
+const DIMS={pill:{x:2.0,z:0.5,y:1.05},vit:{x:0.5,z:2.45,y:1.05},fc:{x:0.64,z:1.19,y:1.0},cab:{x:2.45,z:1.25,y:2.97},rec:{x:1.2,z:2.15,y:1.0},ring:{d:3.0,y0:RING.y0}};
+const LIM={x:[20,600],z:[20,600],y:[30,400],d:[100,500],y0:[300,700]};
+function dimVal(G,k){const b=DIMS[G.userData.type];if(k==='d')return Math.round(b.d*G.scale.x*100);if(k==='y0')return Math.round((b.y0+G.position.y)*100);return Math.round(b[k]*G.scale[k]*100);}
+function setDim(G,k,cm){const b=DIMS[G.userData.type];if(!b||!isFinite(cm))return;cm=Math.min(LIM[k][1],Math.max(LIM[k][0],Math.round(cm)));
+  if(k==='d'){G.scale.x=G.scale.z=cm/100/b.d;}else if(k==='y0'){G.position.y=cm/100-b.y0;}else G.scale[k]=cm/100/b[k];G.updateMatrixWorld(true);}
+const dimsEl=document.getElementById('dims');
+function renderDims(){const b=sel&&!VIEW_ONLY&&DIMS[sel.userData.type];dimsEl.hidden=!b;if(!b)return;
+  const rows=b.d?[['d','Diámetro'],['y0','Cota inferior']]:[['x','Ancho'],['z','Largo'],['y','Alto']];
+  dimsEl.innerHTML=rows.map(([k,l])=>`<label for="dim-${k}">${l}</label><span class="dc"><button type="button" data-k="${k}" data-s="-5" aria-label="${l} −5 cm">−</button><input id="dim-${k}" data-k="${k}" type="number" inputmode="numeric" step="5" min="${LIM[k][0]}" max="${LIM[k][1]}" value="${dimVal(sel,k)}"><i>cm</i><button type="button" data-k="${k}" data-s="5" aria-label="${l} +5 cm">+</button></span>`).join('')+'<button type="button" class="dr" id="dimReset">Medidas originales</button>';}
+dimsEl.addEventListener('click',e=>{const t=e.target.closest('button');if(!t||!sel)return;
+  if(t.id==='dimReset'){sel.scale.set(1,1,1);sel.position.y=0;}else{const k=t.dataset.k;setDim(sel,k,dimVal(sel,k)+(+t.dataset.s));}
+  changed();renderDims();selInfo();});
+dimsEl.addEventListener('change',e=>{const t=e.target;if(!t.dataset.k||!sel)return;setDim(sel,t.dataset.k,parseFloat(t.value));changed();renderDims();selInfo();});
 
 // ---------- grid & measure ----------
 const gridG=new T.Group();gridG.visible=false;scene.add(gridG);
@@ -333,13 +349,13 @@ canvas.addEventListener('touchstart',e=>{if(e.touches.length===2)pinch=Math.hypo
 canvas.addEventListener('touchmove',e=>{if(pinch&&e.touches.length===2){const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);rad=Math.min(120,Math.max(5,rad*pinch/d));pinch=d;}},{passive:true});
 canvas.addEventListener('touchend',()=>{pinch=null;});canvas.style.touchAction='none';
 document.querySelectorAll('#sel button[data-r]').forEach(b=>b.onclick=()=>{if(!sel)return;sel.rotation.y-=(+b.dataset.r)*Math.PI/180;changed();selInfo();});
-document.getElementById('selHome').onclick=()=>{if(!sel)return;const h=sel.userData.home;sel.position.x=h.x;sel.position.z=h.z;sel.rotation.y=0;changed();selInfo();};
+document.getElementById('selHome').onclick=()=>{if(!sel)return;const h=sel.userData.home;sel.position.x=h.x;sel.position.z=h.z;sel.rotation.y=0;sel.position.y=0;sel.scale.set(1,1,1);changed();selInfo();renderDims();};
 document.getElementById('selX').onclick=()=>select(null);
 document.getElementById('selDup').onclick=()=>{if(sel)addOf(sel.userData.type,sel);};
 document.getElementById('selDel').onclick=()=>{if(sel)removeOf(sel.userData.type,sel);};
 window.addEventListener('keydown',e=>{if(!sel||/INPUT|TEXTAREA/.test(document.activeElement.tagName))return;if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();removeOf(sel.userData.type,sel);}});
 let rT=null;document.getElementById('resetAll').onclick=e=>{const b=e.currentTarget;if(!rT){b.textContent='¿Seguro? Pulsa otra vez';b.classList.add('on');rT=setTimeout(()=>{rT=null;b.textContent='Reset';b.classList.remove('on');},3000);return;}
-  clearTimeout(rT);rT=null;b.textContent='Reset';b.classList.remove('on');select(null);MOV.slice().forEach(unplace);ORIG.forEach(G=>{const h=G.userData.home;place(G,h.x,h.z,0);});renameAll();changed();};
+  clearTimeout(rT);rT=null;b.textContent='Reset';b.classList.remove('on');select(null);MOV.slice().forEach(unplace);ORIG.forEach(G=>{const h=G.userData.home;place(G,h.x,h.z,0);G.position.y=0;G.scale.set(1,1,1);});renameAll();changed();};
 
 // ---------- UI ----------
 // leyenda = tabla ELEMENTS de la presentación: [tipo|null, nº, descripción, medidas (cm) · nota, punto del marcador, plantilla]
