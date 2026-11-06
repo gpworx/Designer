@@ -13,6 +13,7 @@
 // z=0 el ESTE (hacia Medac E19) y z=6,5 el OESTE (pasillo junto al muro / Auditorium).
 // =====================================================================
 const VIEW_ONLY=!!window.GP_VIEW_ONLY;
+if(VIEW_ONLY)document.documentElement.classList.add('view-only');
 function main(IM){
 const T=THREE;
 const canvas=document.getElementById('c'),stage=document.getElementById('stage');
@@ -56,7 +57,12 @@ function brandText(g,x,y,fs,col,align){g.save();g.fillStyle=col;g.font=`600 ${fs
 const ringTex=tex(1024,1024,(g,w,h)=>{g.fillStyle='#ffffff';g.fillRect(0,0,w,h);logoMark(g,w*0.5,h*0.3,h*0.08,'#173f4d');g.save();g.translate(w/2,h*0.58);brandText(g,0,0,h*0.13,'#173f4d','center');g.restore();});
 const graphic=(key,draw)=>tex(900,1200,(g,w,h)=>{g.fillStyle='#ffffff';g.fillRect(0,0,w,h);draw(g,w,h,IM[key]);});
 const posterTex=graphic('poster',(g,w,h,im)=>{if(im&&im.naturalWidth){const s=w/im.naturalWidth;g.drawImage(im,0,0,w,im.naturalHeight*s);}});
-const frontTex=tex(718,982,(g,w,h)=>{if(IM.front&&IM.front.naturalWidth)g.drawImage(IM.front,0,0,w,h);else cover(g,IM.forest,w,h,0.3,0.4);});
+// frente del almacén (125 × 297): gráfico de bosque recompuesto a partir de la imagen de 215 cm (marco de madera, puerta a la izquierda, logo arriba)
+const frontTex=tex(505,1200,(g,w,h)=>{const im=IM.front,k=h/982;
+  if(!im||!im.naturalWidth)return;const fx=Math.round(30*k);g.fillStyle='#c9b79d';g.fillRect(0,0,w,h);
+  g.drawImage(im,380,40,300,915,fx,fx,w-2*fx,h-2*fx);            // bosque (zona derecha, sin puerta)
+  const dw=w*0.5;g.drawImage(im,52,318,286,664,fx-2,318*k,dw,h-318*k); // puerta con su marco
+  const lw=w-2*fx-30,lh=lw*110/478;g.drawImage(im,138,95,478,110,fx+15,100*k,lw,lh);}); // logo Coloplast
 const totemTex=tex(400,1000,(g,w,h)=>{g.fillStyle='#f4f5f6';g.fillRect(0,0,w,h);const im=IM.totem;if(im&&im.naturalWidth){const s=w/im.naturalWidth;g.drawImage(im,0,0,w,im.naturalHeight*s);}});
 const woodLogoTex=tex(864,208,(g,w,h)=>{const im=IM.woodlogo;if(im&&im.naturalWidth)g.drawImage(im,0,0,w,h);else{g.fillStyle='#d3c1a6';g.fillRect(0,0,w,h);}});
 
@@ -151,13 +157,13 @@ mov('rec','rec',g=>{const s=new T.Shape(),o=(x,z)=>[x-SX/2,z-SZ/2],r=0.25,P=[[6.
   solid(g,s,FL,FL+0.96,M.wood);const s2=new T.Shape();s2.moveTo(...o(6.28,2.15));[[6.82,2.15],[6.82,3.79],[7.5,3.79],[7.5,4.32]].forEach(q=>s2.lineTo(...o(q[0],q[1])));s2.lineTo(...o(6.3+r,4.32));s2.quadraticCurveTo(...o(6.28,4.32),...o(6.28,4.3-r));s2.lineTo(...o(6.28,2.15));solid(g,s2,FL+0.96,FL+1.0,M.teal);
   plane(g,0.9,0.22,new T.MeshBasicMaterial({map:woodLogoTex}),W(6.296,FL+0.7,3.1),-Math.PI/2);
   box(g,7.0,3.88,7.35,4.18,FL+1.0,FL+1.37,M.black);box(g,7.12,3.9,7.33,4.16,FL+1.0,FL+1.33,M.white);});
-// 9 · almacén 245 × 215 × 297 con nevera dentro; frente: panel de madera + gráfico Coloplast (bosque y puerta)
+// 9 · almacén 245 × 125 × 297 (reducido de 215 para que el lado sur cumpla el 70 % abierto) con nevera dentro; frente: panel de madera + gráfico Coloplast (bosque y puerta)
 // 12 · pared gráfica verde h 297 con logo en el frente del almacén
-mov('cab','cab',g=>{const x0=7.55,x1=SX,z0=2.15,z1=4.3,Hh=2.97,H=FL+Hh;box(g,x0,z0,x1,z1,FL,H,M.wood);
+mov('cab','cab',g=>{const x0=7.55,x1=SX,z0=3.05,z1=4.3,Hh=2.97,H=FL+Hh;box(g,x0,z0,x1,z1,FL,H,M.wood);
   plane(g,z1-z0,Hh,basic(frontTex),W(x0-0.006,FL+Hh/2,(z0+z1)/2),-Math.PI/2);
   plane(g,1.58,Hh-0.05,basic(posterTex),W(9.12,FL+Hh/2,z1+0.006),0);
-  plane(g,1.5,Hh-0.05,basic(posterTex),W(x1+0.006,FL+Hh/2,(z0+z1)/2),Math.PI/2);
-  [[7.9,z1+0.25],[9.6,z1+0.25],[x0-0.25,2.6],[x0-0.25,3.9],[x1+0.25,2.6],[x1+0.25,3.9]].forEach(q=>{box(g,q[0]-0.12,q[1]-0.06,q[0]+0.12,q[1]+0.06,H+0.02,H+0.06,M.light);});});
+  plane(g,1.1,Hh-0.05,basic(posterTex),W(x1+0.006,FL+Hh/2,(z0+z1)/2),Math.PI/2);
+  [[7.9,z1+0.25],[9.6,z1+0.25],[x0-0.25,3.35],[x0-0.25,4.0],[x1+0.25,3.35],[x1+0.25,4.0]].forEach(q=>{box(g,q[0]-0.12,q[1]-0.06,q[0]+0.12,q[1]+0.06,H+0.02,H+0.06,M.light);});});
 // 10 · zonas lounge (2): sofá 150 + 2 butacas + mesa auxiliar Ø 50
 mov('l1','lng',g=>{armchair(g,7.98,0.45,0.5);armchair(g,9.21,0.45,-0.5);lowTable(g,8.59,0.9);sofa(g,8.61,1.65,Math.PI);});
 mov('l2','lng',g=>{sofa(g,8.6,4.82,0);lowTable(g,8.63,5.58);armchair(g,8.01,6.05,Math.PI-0.5);armchair(g,9.24,6.05,Math.PI+0.5);});
@@ -165,7 +171,7 @@ mov('l2','lng',g=>{sofa(g,8.6,4.82,0);lowTable(g,8.63,5.58);armchair(g,8.01,6.05
 mov('j1','lily',()=>lilyBox(TG,9.7,0.25,10.0,1.75));mov('j2','lily',()=>lilyBox(TG,9.7,4.75,10.0,6.25));
 [[7.3,0.2],[7.62,1.65],[7.62,4.79],[7.3,6.18]].forEach((q,i)=>mov('g'+(i+1),'grass',()=>grassPot(TG,q[0],q[1])));
 // 13 · sillas (2)
-[[2.49,1.89],[4.6,4.34]].forEach((q,i)=>mov('c'+(i+1),'ch',()=>stool(TG,q[0],q[1])));
+[[3.12,3.21],[3.82,3.21]].forEach((q,i)=>mov('c'+(i+1),'ch',()=>stool(TG,q[0],q[1]))); // centradas bajo el banner
 
 // ---------- hall ----------
 const common=new T.Group();scene.add(common);
@@ -348,12 +354,12 @@ const LEG=[
  ['tot','6','Tótem demo retroiluminado','115 × 65 × 240 · con pantalla',W(2.57,2.75,5.67),'tot'],
  ['kio','7','Mostrador de máquina','105 × 65 × 105',W(3.87,1.6,6.1),'kio'],
  ['rec','8','Barra en L','120 × 215 × 100 · madera · cafetera',W(6.55,1.35,2.6),'rec'],
- ['cab','9','Almacén','245 × 215 × 297 · nevera dentro · frente madera + gráfico',W(8.8,3.35,3.2),'cab'],
+ ['cab','9','Almacén','245 × 125 × 297 · nevera dentro · frente madera + gráfico',W(8.8,3.35,3.68),'cab'],
  ['lng','10','Zona lounge','sofá 150 + 2 butacas + mesa Ø 50',W(8.6,1.2,1.4),'l1'],
  ['lily','11','Jardinera larga','30 × 150 (×2)',W(9.85,1.25,1.0),'j1'],
  ['grass','11','Jardinera cuadrada','30 × 30 (×4)',W(7.3,1.5,0.2),'g1'],
- [null,'12','Pared gráfica verde con logo','h 297 · frente del almacén · baldas blancas 245 × 50 × 100',W(7.5,2.4,3.7)],
- ['ch','13','Silla','zona central, junto al banner',W(2.49,1.1,1.89),'c1'],
+ [null,'12','Pared gráfica verde con logo','h 297 · frente del almacén (125) · baldas blancas 245 × 50 × 100',W(7.5,2.4,3.9)],
+ ['ch','13','Silla','centradas bajo el banner',W(3.12,1.1,3.21),'c1'],
  [null,'14','Acceso','100 · borde frontal',W(5.5,FL+0.05,6.25)]];
 LEG.forEach(m=>{if(!m[0])return;const G=TEMPL[m[5]];G.updateMatrixWorld(true);m[6]=G.worldToLocal(m[4].clone());});
 const mkWrap=document.getElementById('markers');let MKS=[];
