@@ -570,7 +570,7 @@ shotBtn.onclick=async()=>{if(sending||(CD&&CD.active()))return;sending=true;shot
     shotMsg.textContent='Enviando captura a '+SEND_TO+'…';
     const fd=new FormData();fd.append('subject',subj);fd.append('body',bodyTxt());fd.append('image',shotBlob,fname());
     const r=await fetch(SEND_ENDPOINT,{method:'POST',body:fd});const j=await r.json().catch(()=>({}));
-    if(r.status===429&&j.wait&&CD)CD.start(j.wait*1000);
+    if(r.status===429){if(j.wait&&CD)CD.start(j.wait*1000);shotMsg.textContent='Ya se envió una captura hace poco. Podrás enviar otra cuando termine la espera.';return;}
     if(!r.ok||!j.ok)throw new Error(j.error||('HTTP '+r.status));
     shotMsg.innerHTML='✓ Captura enviada a <b></b>.';shotMsg.querySelector('b').textContent=SEND_TO;if(CD)CD.start();
   }catch(e){

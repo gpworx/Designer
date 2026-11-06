@@ -32,16 +32,36 @@ $subject = str_replace("\n", ' ', $subject);
 $body    = $clean($_POST['body'] ?? '', 5000);
 $name    = preg_replace('/[^A-Za-z0-9._-]/', '', $_FILES['image']['name']) ?: 'captura.png';
 
-$b = 'b' . bin2hex(random_bytes(12));
+// Estructura del correo: la captura se ve dentro del mensaje (HTML) y además va como adjunto.
+//   multipart/mixed
+//     multipart/related
+//       multipart/alternative: texto plano + HTML con <img src="cid:...">
+//       image/png (inline, Content-ID)
+//     image/png (adjunto)
+$b1 = 'm' . bin2hex(random_bytes(10));
+$b2 = 'r' . bin2hex(random_bytes(10));
+$b3 = 'a' . bin2hex(random_bytes(10));
+$cid = 'captura-' . bin2hex(random_bytes(6)) . '@gpworx.com';
+$b64 = chunk_split(base64_encode($data));
 $headers  = "From: GPworx Configurador <__FROM__>\r\nReply-To: <$TO>\r\n";
 $headers .= "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: multipart/mixed; boundary=\"$b\"\r\n";
+$headers .= "Content-Type: multipart/mixed; boundary=\"$b1\"\r\n";
 
-$msg  = "--$b\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n";
-$msg .= str_replace("\n", "\r\n", $body) . "\r\n";
-$msg .= "--$b\r\nContent-Type: image/png; name=\"$name\"\r\nContent-Transfer-Encoding: base64\r\n";
-$msg .= "Content-Disposition: attachment; filename=\"$name\"\r\n\r\n";
-$msg .= chunk_split(base64_encode($data)) . "--$b--\r\n";
+$txt  = str_replace("\n", "\r\n", $body);
+$html = '<div style="font-family:Helvetica,Arial,sans-serif;font-size:14px;color:#222">'
+      . '<p><img src="cid:' . $cid . '" alt="Captura" style="max-width:100%;border:1px solid #ddd;border-radius:6px"></p>'
+      . '<pre style="font-family:inherit;white-space:pre-wrap">' . htmlspecialchars($body, ENT_QUOTES, 'UTF-8') . '</pre></div>';
+
+$msg  = "This is a multi-part message in MIME format.\r\n";
+$msg .= "--$b1\r\nContent-Type: multipart/related; boundary=\"$b2\"\r\n\r\n";
+$msg .= "--$b2\r\nContent-Type: multipart/alternative; boundary=\"$b3\"\r\n\r\n";
+$msg .= "--$b3\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n" . chunk_split(base64_encode($txt));
+$msg .= "--$b3\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n" . chunk_split(base64_encode($html));
+$msg .= "--$b3--\r\n";
+$msg .= "--$b2\r\nContent-Type: image/png; name=\"$name\"\r\nContent-Transfer-Encoding: base64\r\nContent-ID: <$cid>\r\nContent-Disposition: inline; filename=\"$name\"\r\n\r\n" . $b64;
+$msg .= "--$b2--\r\n";
+$msg .= "--$b1\r\nContent-Type: image/png; name=\"$name\"\r\nContent-Transfer-Encoding: base64\r\nContent-Disposition: attachment; filename=\"$name\"\r\n\r\n" . $b64;
+$msg .= "--$b1--\r\n";
 
 $encSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
 

@@ -1,6 +1,6 @@
 # Genera index.html (repo, carga ../js/three.min.js) y una versión autocontenida para el artifact
 import base64,sys
-V='20261106'  # versión para evitar caché antigua
+V='20261106b'  # versión para evitar caché antigua
 t=open('template.html').read();css=open('styles.css').read()
 r=t.replace('<!--CSS-->','<link rel="stylesheet" href="styles.css?v=%s">'%V).replace('<!--LOGO-->','../logo-gpworx.svg').replace('<!--SCRIPTS-->','<script src="../js/three.min.js?v=%s"></script>\n<script src="images.js?v=%s"></script>\n<script src="../js/gp-cooldown.js?v=%s"></script>\n<script src="app.js?v=%s"></script>'%(V,V,V,V))
 head='<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'+r.replace('<div class="printblock">','</head><body>\n<div class="printblock">',1)+'\n</body></html>\n'

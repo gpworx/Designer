@@ -24,3 +24,13 @@
     bind(b){btn=b;orig=b.innerHTML;const left=until()-Date.now();if(left>0){total=Math.max(left,MS);timer=setInterval(tick,1000);tick();}}
   };
 })();
+
+// ---------- aviso visible si el visor no puede arrancar (para diagnosticar en cualquier dispositivo) ----------
+(function(){
+  function show(msg){try{const st=document.getElementById('stage');if(!st||st.querySelector('.gp-err'))return;
+    const d=document.createElement('div');d.className='gp-err';
+    d.style.cssText='position:absolute;left:12px;right:12px;bottom:12px;z-index:9;background:#c0392b;color:#fff;font:13px/1.4 Helvetica,Arial,sans-serif;padding:10px 12px;border-radius:8px';
+    d.textContent='El visor no ha podido cargarse en este navegador: '+msg+' · '+navigator.userAgent;st.appendChild(d);}catch(_){}}
+  window.addEventListener('error',e=>show((e&&e.message)||'error desconocido'));
+  window.addEventListener('unhandledrejection',e=>show(String((e&&e.reason&&e.reason.message)||e.reason||'error')));
+})();

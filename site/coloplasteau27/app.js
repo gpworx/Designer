@@ -427,7 +427,7 @@ shotBtn.onclick=async()=>{if(CD&&CD.active())return;shotBtn.disabled=true;if(CD)
   const blob=await new Promise(r=>canvas.toBlob(r,'image/png'));shotImg.src=URL.createObjectURL(blob);shotBox.hidden=false;shotMsg.textContent='Enviando captura…';
   const R=LAST,body='Coloplast · EAU 2027 · Stand E01\n\n'+SIDES.map(s=>`${s.name}: abierto ${pct(R[s.id].open)} · transparencia ${pct(R[s.id].see)}`).join('\n')+'\n\n'+MOV.map(G=>`· ${G.userData.name}: X ${fmt(G.position.x+SX/2)} m, Y ${fmt(G.position.z+SZ/2)} m`).join('\n');
   const fd=new FormData();fd.append('subject','Coloplast EAU 2027 · E01 · configuración');fd.append('body',body);fd.append('image',blob,'coloplast-eau27-e01.png');
-  const r=await fetch(SEND,{method:'POST',body:fd});const j=await r.json().catch(()=>({}));if(r.status===429&&j.wait&&CD)CD.start(j.wait*1000);if(!r.ok||!j.ok)throw new Error(j.error||('HTTP '+r.status));shotMsg.textContent='✓ Captura enviada a gregor@gpworx.com.';if(CD)CD.start();
+  const r=await fetch(SEND,{method:'POST',body:fd});const j=await r.json().catch(()=>({}));if(r.status===429){if(j.wait&&CD)CD.start(j.wait*1000);shotMsg.textContent='Ya se envió una captura hace poco. Podrás enviar otra cuando termine la espera.';return;}if(!r.ok||!j.ok)throw new Error(j.error||('HTTP '+r.status));shotMsg.textContent='✓ Captura enviada a gregor@gpworx.com.';if(CD)CD.start();
  }catch(e){shotMsg.textContent='No se pudo enviar la captura ('+(e.message||e)+'). Inténtalo de nuevo.';}finally{if(CD)CD.busy(false);else shotBtn.disabled=false;}};
 document.getElementById('shotCancel').onclick=()=>{shotBox.hidden=true;};
 
