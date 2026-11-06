@@ -1,0 +1,414 @@
+{
+ "format": "gpworx-stand",
+ "version": 1,
+ "title": "Stand - Event 2027",
+ "client": "",
+ "option": "Option A",
+ "stand": {
+  "w": 1200,
+  "d": 800,
+  "floor": "#f3f4f6"
+ },
+ "elements": [
+  {
+   "id": "a01",
+   "type": "lintel",
+   "name": "Dintel azul · lado del muro",
+   "x": 0,
+   "z": -370,
+   "rot": 0,
+   "p": {
+    "w": 1150,
+    "band": 80,
+    "d": 20,
+    "base": 400
+   },
+   "c": {
+    "main": "#5d729e"
+   },
+   "text": "GPWORX"
+  },
+  {
+   "id": "a02",
+   "type": "lintel",
+   "name": "Dintel azul · lateral izquierdo",
+   "x": -570,
+   "z": 15,
+   "rot": 90,
+   "p": {
+    "w": 760,
+    "band": 80,
+    "d": 20,
+    "base": 400
+   },
+   "c": {
+    "main": "#5d729e"
+   }
+  },
+  {
+   "id": "a03",
+   "type": "column",
+   "name": "Columna 1",
+   "x": -450,
+   "z": -370,
+   "rot": 0,
+   "p": {
+    "w": 50,
+    "d": 50,
+    "h": 400
+   },
+   "c": {}
+  },
+  {
+   "id": "a04",
+   "type": "column",
+   "name": "Columna 2",
+   "x": -150,
+   "z": -370,
+   "rot": 0,
+   "p": {
+    "w": 50,
+    "d": 50,
+    "h": 400
+   },
+   "c": {}
+  },
+  {
+   "id": "a05",
+   "type": "column",
+   "name": "Columna 3",
+   "x": 150,
+   "z": -370,
+   "rot": 0,
+   "p": {
+    "w": 50,
+    "d": 50,
+    "h": 400
+   },
+   "c": {}
+  },
+  {
+   "id": "a06",
+   "type": "column",
+   "name": "Columna 4",
+   "x": 450,
+   "z": -370,
+   "rot": 0,
+   "p": {
+    "w": 50,
+    "d": 50,
+    "h": 400
+   },
+   "c": {}
+  },
+  {
+   "id": "a07",
+   "type": "column",
+   "name": "Columna 5",
+   "x": -570,
+   "z": -80,
+   "rot": 90,
+   "p": {
+    "w": 50,
+    "d": 50,
+    "h": 400
+   },
+   "c": {}
+  },
+  {
+   "id": "a08",
+   "type": "column",
+   "name": "Columna 6",
+   "x": -570,
+   "z": 220,
+   "rot": 90,
+   "p": {
+    "w": 50,
+    "d": 50,
+    "h": 400
+   },
+   "c": {}
+  },
+  {
+   "id": "a09",
+   "type": "counter_curved",
+   "name": "Mostrador de recepción",
+   "x": -400,
+   "z": 250,
+   "rot": -45,
+   "p": {
+    "r": 120,
+    "ang": 110,
+    "d": 55,
+    "h": 110
+   },
+   "c": {
+    "main": "#f4f4f4",
+    "acc": "#1d1f24"
+   },
+   "text": "GPWORX"
+  },
+  {
+   "id": "a10",
+   "type": "storage_cyl",
+   "name": "Cilindro azul · maqueta NEXT",
+   "x": 0,
+   "z": 40,
+   "rot": 0,
+   "p": {
+    "diam": 140,
+    "h": 110
+   },
+   "c": {
+    "main": "#5d729e",
+    "acc": "#f4f4f4"
+   }
+  },
+  {
+   "id": "a11",
+   "type": "counter_curved",
+   "name": "Mostrador zona NEXT",
+   "x": 0,
+   "z": -20,
+   "rot": 180,
+   "p": {
+    "r": 90,
+    "ang": 200,
+    "d": 50,
+    "h": 105
+   },
+   "c": {
+    "main": "#f4f4f4",
+    "acc": "#1d1f24"
+   }
+  },
+  {
+   "id": "a12",
+   "type": "storage_cyl",
+   "name": "Almacén curvo con pantalla",
+   "x": 420,
+   "z": -230,
+   "rot": 0,
+   "p": {
+    "diam": 300,
+    "h": 350
+   },
+   "c": {
+    "main": "#16192a",
+    "acc": "#101114"
+   },
+   "text": "GPWORX"
+  },
+  {
+   "id": "a13",
+   "type": "counter_curved",
+   "name": "Barra curva",
+   "x": 420,
+   "z": -230,
+   "rot": 200,
+   "p": {
+    "r": 160,
+    "ang": 100,
+    "d": 55,
+    "h": 110
+   },
+   "c": {
+    "main": "#f4f4f4",
+    "acc": "#1d1f24"
+   }
+  },
+  {
+   "id": "a14",
+   "type": "glass_room",
+   "name": "Sala de reunión 1",
+   "x": -330,
+   "z": -170,
+   "rot": 0,
+   "p": {
+    "diam": 260,
+    "h": 250
+   },
+   "c": {}
+  },
+  {
+   "id": "a15",
+   "type": "glass_room",
+   "name": "Sala de reunión 2",
+   "x": 440,
+   "z": 230,
+   "rot": 0,
+   "p": {
+    "diam": 260,
+    "h": 250
+   },
+   "c": {}
+  },
+  {
+   "id": "a16",
+   "type": "totem",
+   "name": "Tótem Challenge Selector 1",
+   "x": -120,
+   "z": 360,
+   "rot": 0,
+   "p": {
+    "w": 60,
+    "d": 35,
+    "h": 200
+   },
+   "c": {}
+  },
+  {
+   "id": "a17",
+   "type": "totem",
+   "name": "Tótem Challenge Selector 2",
+   "x": 140,
+   "z": 360,
+   "rot": 0,
+   "p": {
+    "w": 60,
+    "d": 35,
+    "h": 200
+   },
+   "c": {}
+  },
+  {
+   "id": "a18",
+   "type": "high_table",
+   "name": "Mesa alta 1",
+   "x": -160,
+   "z": 140,
+   "rot": 0,
+   "p": {
+    "diam": 80,
+    "h": 110
+   },
+   "c": {}
+  },
+  {
+   "id": "a19",
+   "type": "stool",
+   "name": "Taburete",
+   "x": -220,
+   "z": 150,
+   "rot": 0,
+   "p": {
+    "h": 75
+   },
+   "c": {}
+  },
+  {
+   "id": "a20",
+   "type": "stool",
+   "name": "Taburete",
+   "x": -100,
+   "z": 130,
+   "rot": 0,
+   "p": {
+    "h": 75
+   },
+   "c": {}
+  },
+  {
+   "id": "a21",
+   "type": "high_table",
+   "name": "Mesa alta 2",
+   "x": 150,
+   "z": 160,
+   "rot": 0,
+   "p": {
+    "diam": 80,
+    "h": 110
+   },
+   "c": {}
+  },
+  {
+   "id": "a22",
+   "type": "stool",
+   "name": "Taburete",
+   "x": 90,
+   "z": 170,
+   "rot": 0,
+   "p": {
+    "h": 75
+   },
+   "c": {}
+  },
+  {
+   "id": "a23",
+   "type": "stool",
+   "name": "Taburete",
+   "x": 210,
+   "z": 150,
+   "rot": 0,
+   "p": {
+    "h": 75
+   },
+   "c": {}
+  },
+  {
+   "id": "a24",
+   "type": "high_table",
+   "name": "Mesa alta 3",
+   "x": 80,
+   "z": -230,
+   "rot": 0,
+   "p": {
+    "diam": 80,
+    "h": 110
+   },
+   "c": {}
+  },
+  {
+   "id": "a25",
+   "type": "stool",
+   "name": "Taburete",
+   "x": 20,
+   "z": -220,
+   "rot": 0,
+   "p": {
+    "h": 75
+   },
+   "c": {}
+  },
+  {
+   "id": "a26",
+   "type": "stool",
+   "name": "Taburete",
+   "x": 140,
+   "z": -240,
+   "rot": 0,
+   "p": {
+    "h": 75
+   },
+   "c": {}
+  },
+  {
+   "id": "a27",
+   "type": "planter",
+   "name": "Jardinera de lirios 1",
+   "x": -560,
+   "z": 360,
+   "rot": 0,
+   "p": {
+    "w": 70,
+    "h": 55,
+    "plant": 120
+   },
+   "c": {}
+  },
+  {
+   "id": "a28",
+   "type": "planter",
+   "name": "Jardinera de lirios 2",
+   "x": 560,
+   "z": 360,
+   "rot": 0,
+   "p": {
+    "w": 70,
+    "h": 55,
+    "plant": 120
+   },
+   "c": {}
+  }
+ ]
+}

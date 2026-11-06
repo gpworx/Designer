@@ -34,3 +34,20 @@ Textos a cambiar para un nuevo cliente/evento: título y descripción en `index.
 `site-view/index.html` se publica en `design/` y carga los `css/` y `js/` de
 `designer/`, así que comparte diseño con la versión editable. Activa
 `GP_VIEW_ONLY`: no se pueden mover, girar, duplicar, añadir ni quitar elementos.
+
+## Editor con biblioteca (gpworx.com/designer/app/)
+
+Primera versión de la app: el stand es un **proyecto JSON** (`site/app/projects/*.json`)
+y se monta con elementos de la **biblioteca** (`site/app/library.js`).
+
+| Archivo | Qué contiene |
+|---|---|
+| `app/index.html` | Interfaz (móvil/tablet primero; en portátil, panel lateral) |
+| `app/app.css` | Estilos |
+| `app/library.js` | Biblioteca de elementos paramétricos (medidas, colores, imagen/texto) |
+| `app/editor.js` | Motor 3D, gestos táctiles, edición, deshacer, guardar/abrir, captura |
+| `app/projects/option-a.json` | Option A recreada con la biblioteca |
+
+- Editable: `/designer/app/` · Solo visor: `/designer/app/?view=1`
+- Abrir un proyecto concreto: `/designer/app/?p=projects/option-a.json`
+- El proyecto se guarda en el dispositivo; «Guardar archivo» descarga el .json.

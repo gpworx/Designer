@@ -1,0 +1,94 @@
+/* =====================================================================
+   GPworx Stand Editor · ESTILOS (móvil y tablet primero, portátil después)
+   ===================================================================== */
+:root{--bg:#1f2023;--panel:#2a2b2f;--line:#3a3b40;--txt:#eceef2;--mut:#9a9ca3;--navy:#5d729e;--acc:#ffb020;--led:#3d9bff;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--txt);font-family:Helvetica,Arial,sans-serif}
+button{font-family:inherit}
+
+/* ---------- cabecera ---------- */
+.bar{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px 14px 8px}
+.bar .gp{height:52px;margin:6px;display:block}
+.bar h1{margin:0;font-size:clamp(14px,3.8vw,22px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar h3{margin:3px 0 0;font-size:12px;font-weight:400;color:var(--mut)}
+.ttl{min-width:0}
+.ib{width:44px;height:44px;border-radius:10px;border:1px solid #45474d;background:var(--panel);color:var(--txt);font-size:22px;cursor:pointer}
+
+/* ---------- visor ---------- */
+.wrap{display:grid;grid-template-columns:1fr;gap:12px;padding:0 10px 10px}
+.stage{position:relative;height:62vh;min-height:340px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#2a2b2e;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.stage canvas{display:block;width:100%;height:100%;touch-action:none}
+.tag{position:absolute;left:12px;top:12px;background:var(--led);color:#fff;font-weight:bold;border-radius:6px;padding:2px 9px;font-size:12px;pointer-events:none}
+.hint{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);background:rgba(20,21,24,.8);color:#d6d8de;font-size:11px;padding:5px 10px;border-radius:999px;white-space:nowrap;max-width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.wm{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.wm i{position:absolute;inset:-60%;transform:rotate(-24deg);background-repeat:repeat;opacity:.16}
+
+/* ---------- herramientas ---------- */
+.tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;margin-top:8px}
+.grp{display:flex;gap:5px;flex-wrap:wrap}
+.tools button{background:var(--panel);color:var(--txt);border:1px solid #45474d;border-radius:999px;padding:9px 12px;font-weight:bold;font-size:12px;cursor:pointer;min-height:38px}
+.tools button.sq{border-radius:7px;min-width:42px}
+.tools button.on{background:var(--acc);border-color:var(--acc);color:#222}
+.tools button.pri{background:var(--navy);border-color:var(--navy);color:#fff}
+.tools button:disabled{opacity:.4}
+
+/* ---------- panel lateral ---------- */
+aside{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+aside h3,.sheet h3{margin:0 0 10px;font-size:12px;letter-spacing:1.5px;color:var(--mut)}
+.elist{list-style:none;margin:0;padding:0}
+.elist li{display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;cursor:pointer;font-size:14px}
+.elist li:hover,.elist li.on{background:#3a3b40}
+.elist li b{flex:none;width:24px;height:24px;border-radius:50%;background:var(--led);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center}
+.elist li span{flex:1;min-width:0}
+.elist li i{font-style:normal;color:var(--mut);font-size:12px}
+.shot{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--navy);color:#fff;border:0;border-radius:12px;padding:13px 14px;font:bold 15px Helvetica,Arial,sans-serif;cursor:pointer;margin-bottom:12px;position:relative;overflow:hidden}
+.shot svg{width:22px;height:22px}
+.shot.cooling{background:#3a3d45;color:#d6d8de;cursor:wait}
+.shot.cooling::after{content:"";position:absolute;left:0;bottom:0;height:4px;width:var(--p,0%);background:var(--acc);transition:width 1s linear}
+.shot .spin{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:gpspin .8s linear infinite}
+@keyframes gpspin{to{transform:rotate(360deg)}}
+.shotbox{position:relative;background:#222;border:1px solid #45474d;border-radius:12px;padding:44px 12px 12px;margin:-4px 0 14px}
+.shotbox img{width:100%;border-radius:8px;display:block}
+.shotbox p{font-size:13px;margin:8px 0 0}
+
+/* ---------- botón cerrar ✕ (siempre arriba a la derecha) ---------- */
+.xclose{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;border:1px solid #55575e;background:#1a1b1e;color:#fff;font:bold 15px/1 Helvetica,Arial,sans-serif;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:2}
+.xclose:hover{border-color:var(--acc);color:var(--acc)}
+
+/* ---------- hojas inferiores (biblioteca, propiedades, menú) ---------- */
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:20;max-height:72vh;overflow:auto;background:var(--panel);border-top:1px solid #4a4c52;border-radius:18px 18px 0 0;padding:18px 14px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(0,0,0,.45)}
+.sheet h3{padding-right:44px}
+#libList .cat{margin:12px 0 6px;font-size:11px;letter-spacing:1px;color:var(--mut);text-transform:uppercase}
+#libList .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:8px}
+#libList button{background:#222;border:1px solid #45474d;border-radius:10px;color:var(--txt);padding:10px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;min-height:76px}
+#libList button b{font-size:24px;line-height:1;color:var(--acc)}
+#libList button:hover{border-color:var(--acc)}
+.row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #34353a}
+.row label{font-size:13px}
+.num{display:flex;align-items:center;gap:4px}
+.num button{width:36px;height:36px;border-radius:50%;border:1px solid #45474d;background:#222;color:var(--txt);font-size:18px;cursor:pointer}
+.num input{width:72px;height:36px;text-align:center;background:#1a1b1e;color:var(--txt);border:1px solid #45474d;border-radius:8px;font-size:15px}
+.num small{color:var(--mut);width:18px}
+.row input[type=color]{width:52px;height:36px;border:1px solid #45474d;border-radius:8px;background:#1a1b1e;padding:2px}
+.row input[type=text]{width:160px;height:36px;background:#1a1b1e;color:var(--txt);border:1px solid #45474d;border-radius:8px;padding:0 10px;font-size:14px}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.acts button,.mgrid button{background:#222;color:var(--txt);border:1px solid #45474d;border-radius:8px;padding:10px 12px;font-weight:bold;font-size:13px;cursor:pointer;min-height:42px}
+.acts button.del{border-color:#8e3a33;color:#ff9b91}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.muted{color:var(--mut);font-size:12px}
+.form .row input[type=text]{width:190px}
+
+.copy{color:#6f7178;font-size:11px;text-align:center;padding:10px 16px 20px}
+
+/* ---------- modo solo visor ---------- */
+.view-only .edit-only{display:none!important}
+
+/* ---------- portátil: panel lateral y hojas como paneles flotantes ---------- */
+@media(min-width:1000px){
+  .wrap{grid-template-columns:1fr 320px;padding:0 20px 20px;gap:18px}
+  .bar{padding:16px 20px 12px}.bar .gp{height:70px;margin:9px}.bar h3{font-size:14px}
+  .stage{height:calc(100vh - 210px);min-height:520px}
+  .sheet{left:auto;right:20px;bottom:20px;top:120px;width:340px;max-height:none;border-radius:16px;border:1px solid #4a4c52}
+}
+@media(max-width:999px){aside .elist{max-height:none}.sheet{max-height:48vh}#libSheet{max-height:60vh}}
+@media(max-width:600px){.bar{gap:6px;padding:8px 10px 6px}.bar .gp{height:40px;margin:4px}.bar h1{font-size:clamp(11px,3.5vw,18px)}.ib{width:40px;height:40px}.stage{height:56vh}.tools button{padding:9px 10px}.hint{font-size:10px}}

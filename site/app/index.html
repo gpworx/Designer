@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<meta name="theme-color" content="#1f2023">
+<title>GPworx - Stand Editor</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicons/favicon-32x32.png">
+<link rel="stylesheet" href="app.css?v=1">
+</head>
+<body>
+<!-- ===================== CABECERA ===================== -->
+<header class="bar">
+  <img class="gp" src="../logo-gpworx.svg" alt="GPWORX Creative Communication">
+  <div class="ttl"><h1 id="pTitle">Stand - Event 2027</h1><h3 id="pSub">Isla 12×8 m · Option A</h3></div>
+  <button class="ib edit-only" id="menuBtn" aria-label="Menú" title="Menú">⋯</button>
+</header>
+
+<!-- ===================== CUERPO ===================== -->
+<div class="wrap">
+  <div class="col">
+    <!-- ---------- VISOR 3D ---------- -->
+    <div class="stage" id="stage">
+      <canvas id="c"></canvas>
+      <div class="wm" aria-hidden="true"><i id="wmTile"></i></div>
+      <span class="tag" id="optTag">OPTION A</span>
+      <div class="hint" id="hint">Toca un elemento para editarlo · arrástralo para moverlo · un dedo gira · pellizca para zoom</div>
+    </div>
+    <!-- ---------- BARRA DE HERRAMIENTAS ---------- -->
+    <nav class="tools">
+      <div class="grp views">
+        <button data-v="main" class="on">Main</button><button data-v="top">Top</button><button data-v="front">Front</button><button data-v="side">Side</button>
+      </div>
+      <div class="grp edit-only">
+        <button class="sq pri" id="addBtn">＋ Add</button>
+        <button class="sq" id="undoBtn" title="Deshacer" aria-label="Deshacer">↶</button>
+        <button class="sq" id="redoBtn" title="Rehacer" aria-label="Rehacer">↷</button>
+        <button class="sq on" id="gridBtn" title="Ajustar a cuadrícula de 10 cm">Grid</button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- ---------- PANEL LATERAL (portátil) / HOJAS INFERIORES (tablet y móvil) ---------- -->
+  <aside id="side">
+    <button class="shot" id="shotBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l2-2.5h6L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Enviar captura a GPworx</button>
+    <div class="shotbox" id="shotBox" hidden><button class="xclose" id="shotX" type="button" aria-label="Cerrar">✕</button><img id="shotImg" alt="Captura"><p id="shotMsg" role="status"></p></div>
+    <h3>ELEMENTOS DEL STAND</h3>
+    <ol class="elist" id="elist"></ol>
+  </aside>
+</div>
+
+<!-- ===================== HOJA: BIBLIOTECA ===================== -->
+<section class="sheet" id="libSheet" hidden>
+  <button class="xclose" data-close aria-label="Cerrar">✕</button>
+  <h3>BIBLIOTECA GPWORX</h3>
+  <div id="libList"></div>
+</section>
+
+<!-- ===================== HOJA: PROPIEDADES DEL ELEMENTO ===================== -->
+<section class="sheet" id="propSheet" hidden>
+  <button class="xclose" data-close aria-label="Cerrar">✕</button>
+  <h3 id="propTitle">ELEMENTO</h3>
+  <div id="propBody"></div>
+</section>
+
+<!-- ===================== HOJA: MENÚ DEL PROYECTO ===================== -->
+<section class="sheet" id="menuSheet" hidden>
+  <button class="xclose" data-close aria-label="Cerrar">✕</button>
+  <h3>PROYECTO</h3>
+  <div class="form" id="standForm"></div>
+  <div class="mgrid">
+    <button id="mNew">Nuevo proyecto</button>
+    <button id="mExample">Cargar Option A</button>
+    <button id="mOpen">Abrir archivo…</button>
+    <button id="mSave">Guardar archivo</button>
+  </div>
+  <input type="file" id="fileIn" accept=".json,application/json" hidden>
+  <p class="muted">El proyecto se guarda automáticamente en este dispositivo. «Guardar archivo» descarga una copia (.json) para abrirla en otro equipo.</p>
+</section>
+
+<footer class="copy">© <span id="yr"></span> GPworx · Diseños, biblioteca y elementos de autoría propia, protegidos por derechos de autor. Prohibida su copia, reproducción o fabricación sin autorización.</footer>
+
+<script src="../js/three.min.js?v=1"></script>
+<script src="../js/gp-cooldown.js?v=1"></script>
+<script src="library.js?v=1"></script>
+<script src="editor.js?v=1"></script>
+</body>
+</html>
